@@ -1,0 +1,9 @@
+name: KitPvP-GUI
+main: net.spideynn.bukkit.kitgui.Main
+author: Spideynn, MasterSpoofZz
+version: 0.1-SNAPSHOT
+description: Kit plugin for NovaCraft
+commands:
+  kitgui:
+    description: Show the Kit GUI (BETA)
+    usage: /kitgui
