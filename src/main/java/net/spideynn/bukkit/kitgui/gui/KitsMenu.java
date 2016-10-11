@@ -5,20 +5,15 @@ import net.spideynn.bukkit.kitgui.guilib.events.ItemClickEvent;
 import net.spideynn.bukkit.kitgui.guilib.items.BackItem;
 import net.spideynn.bukkit.kitgui.guilib.items.MenuItem;
 import net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.plugin.InvalidDescriptionException;
-import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-import java.io.File;
 
 public class KitsMenu extends ItemMenu {
     public KitsMenu(JavaPlugin plugin, ItemMenu parent) {
@@ -363,7 +358,7 @@ class TankKit extends MenuItem {
             Player p = event.getPlayer();
             Main.choseKit.put(p, true);
 
-            p.sendMessageChatColor.DARK_GREEN + "You have selected the kit Tank.");
+            p.sendMessage(ChatColor.DARK_GREEN + "You have selected the kit Tank.");
             for (PotionEffect i1 : p.getActivePotionEffects()) {
                 p.removePotionEffect(i1.getType());
             }
