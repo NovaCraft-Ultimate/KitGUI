@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="546a2bfa-b6c2-42a1-9a4b-20fb5012e78d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/spideynn/bukkit/kitgui/gui/KitsMenu.java" afterPath="$PROJECT_DIR$/src/main/java/net/spideynn/bukkit/kitgui/gui/KitsMenu.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="KitGUI.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,7 +25,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="KitsMenu.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="KitsMenu.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/spideynn/bukkit/kitgui/gui/KitsMenu.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="255">
@@ -45,6 +45,16 @@
                 <element signature="e#15063#15064#0" expanded="true" />
                 <element signature="e#15166#15167#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -115,6 +125,7 @@
         <option value="$PROJECT_DIR$/src/main/java/net/spideynn/bukkit/kitgui/Listeners.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/spideynn/bukkit/kitgui/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/spideynn/bukkit/kitgui/gui/KitsMenu.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -777,6 +788,14 @@
             <element signature="e#15063#15064#0" expanded="true" />
             <element signature="e#15166#15167#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
