@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/KitGUI.iml" filepath="$PROJECT_DIR$/KitGUI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kitgui.iml" filepath="$PROJECT_DIR$/kitgui.iml" />
     </modules>
   </component>
 </project>
