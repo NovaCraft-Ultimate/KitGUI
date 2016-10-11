@@ -19,6 +19,12 @@ public class KitsMenu extends ItemMenu {
     public KitsMenu(JavaPlugin plugin, ItemMenu parent) {
         super("Kits", Size.ONE_LINE, plugin, parent);
         this.setItem(0, new ArcherKit());
+        this.setItem(1, new AssassinKit());
+        this.setItem(2, new AxesKit());
+        this.setItem(3, new CactiKit());
+        this.setItem(4, new EndermanKit());
+        this.setItem(5, new SniperKit());
+        this.setItem(6, new TankKit());
         this.setItem(8, new BackItem(Material.BARRIER));
     }
 }
@@ -295,8 +301,10 @@ class SniperKit extends MenuItem {
     public SniperKit() {
         super(ChatColor.DARK_GREEN + "Sniper", new ItemStack(Material.AIR), "");
         ItemStack bow = new ItemStack(Material.BOW);
-        bow.addEnchantment(Enchantment.LUCK, 1);
-        setNameAndLore(bow, ChatColor.DARK_GREEN + "Sniper", null);
+        bow.addUnsafeEnchantment(Enchantment.LUCK, 1);
+        ItemMeta meta = bow.getItemMeta();
+        meta.setDisplayName(ChatColor.DARK_GREEN + "Sniper");
+        setIcon(bow);
     }
 
     @Override
@@ -400,5 +408,26 @@ class TankKit extends MenuItem {
             p.getInventory().setBoots(i4);
             p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 999999, 1));
         }
+    }
+}
+
+class ConfirmBuyKitItem extends MenuItem {
+
+    public ConfirmBuyKitItem(String displayName, ItemStack icon, String... lore) {
+        super(displayName, icon, lore);
+    }
+}
+
+class BuyKitItem extends MenuItem {
+
+    public BuyKitItem(String displayName, ItemStack icon, String... lore) {
+        super(displayName, icon, lore);
+    }
+}
+
+class ConfirmBuyKitMenu extends ItemMenu{
+
+    public ConfirmBuyKitMenu(String name, Size size, JavaPlugin plugin, ItemMenu parent) {
+        super(name, size, plugin, parent);
     }
 }
