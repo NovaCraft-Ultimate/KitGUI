@@ -1,6 +1,7 @@
 package net.spideynn.bukkit.kitgui;
 
 import net.spideynn.bukkit.kitgui.gui.MainGUI;
+import net.spideynn.bukkit.kitgui.mysql.MySQL;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -8,11 +9,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 public class Main extends JavaPlugin {
 
-    public Logger log = getServer().getLogger();
+    private Logger log = getServer().getLogger();
+    public static HashMap<Player, Boolean> choseKit = new HashMap<Player, Boolean>();
+
+    protected MySQL db;
     private static JavaPlugin instance;
     /// TODO: BattleLevels API https://github.com/RobiRami/BattleLevels/wiki
 
@@ -24,6 +29,9 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+        getServer().getPluginManager().registerEvents(new Listeners(), this);
+        // TODO: Load database details from config.
+        //db = new MySQL(this, "localhost", "3306", "root", "novaserver", "");
         Plugin pl = Bukkit.getPluginManager().getPlugin("BattleLevels");
         if (pl == null) {
             log.severe("BattleLevels is not installed. Disabling plugin.");
