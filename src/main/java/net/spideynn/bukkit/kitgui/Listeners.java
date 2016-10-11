@@ -11,7 +11,11 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class Listeners implements Listener {
     @EventHandler
     public void onPlayerQuitEvent(PlayerQuitEvent event) {
-        Main.choseKit.remove(event.getPlayer());
+        try {
+            Main.choseKit.remove(event.getPlayer());
+        } catch (NullPointerException e) {
+            // ignored
+        }
     }
 
     @EventHandler

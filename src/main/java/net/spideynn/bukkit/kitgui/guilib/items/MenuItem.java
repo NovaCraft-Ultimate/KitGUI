@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class MenuItem {
     private final String displayName;
-    private final ItemStack icon;
+    private ItemStack icon;
     private final List<String> lore;
 
     public MenuItem(String displayName, ItemStack icon, String... lore) {
@@ -38,6 +38,15 @@ public class MenuItem {
      */
     public ItemStack getIcon() {
         return icon;
+    }
+
+    /**
+     * Sets the icon of the MenuItem.
+     *
+     * @return The icon.
+     */
+    public void setIcon(ItemStack itemStack) {
+        icon = itemStack;
     }
 
     /**
@@ -79,7 +88,7 @@ public class MenuItem {
     public static ItemStack setNameAndLore(ItemStack itemStack, String displayName, List<String> lore) {
         ItemMeta meta = itemStack.getItemMeta();
         meta.setDisplayName(displayName);
-        meta.setLore(lore);
+        if (lore != null) meta.setLore(lore);
         itemStack.setItemMeta(meta);
         return itemStack;
     }
