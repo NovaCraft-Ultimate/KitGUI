@@ -1,6 +1,8 @@
 package net.spideynn.bukkit.kitgui;
 
 import net.spideynn.bukkit.kitgui.gui.MainGUI;
+import net.spideynn.bukkit.kitgui.listeners.Listeners;
+import net.spideynn.bukkit.kitgui.mongodb.DatabaseHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -13,8 +15,9 @@ import java.util.logging.Logger;
 
 public class Main extends JavaPlugin {
 
-    private Logger log = getServer().getLogger();
+    public Logger log = getLogger();
     public static HashMap<Player, Boolean> choseKit = new HashMap<Player, Boolean>();
+    public static DatabaseHandler db = new DatabaseHandler(27017);
 
     private static JavaPlugin instance;
     /// TODO: BattleLevels API https://github.com/RobiRami/BattleLevels/wiki

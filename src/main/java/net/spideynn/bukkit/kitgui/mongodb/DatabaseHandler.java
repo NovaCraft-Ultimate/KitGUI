@@ -1,13 +1,10 @@
 package net.spideynn.bukkit.kitgui.mongodb;
 
 import com.mongodb.MongoClient;
-import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
+import net.spideynn.bukkit.kitgui.utils.Kits;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DatabaseHandler {
     private MongoClient mc;
@@ -17,10 +14,11 @@ public class DatabaseHandler {
 
     public DatabaseHandler(int port)
     {
-        ServerAddress addr = new ServerAddress("hostname", port);
-        List<MongoCredential> credentials = new ArrayList<>();
-        credentials.add(MongoCredential.createCredential("username", "database", "password".toCharArray()));
-        mc = new MongoClient(addr, credentials);
+        ServerAddress addr = new ServerAddress("localhost", port);
+        //List<MongoCredential> credentials = new ArrayList<>();
+        //credentials.add(MongoCredential.createCredential("username", "database", "password".toCharArray()));
+        //mc = new MongoClient(addr, credentials);
+        mc = new MongoClient(addr);
 
         morphia = new Morphia();
 
@@ -29,5 +27,28 @@ public class DatabaseHandler {
         datastore.ensureIndexes();
 
         playerDAO = new PlayerDAO(Player.class, datastore);
+    }
+
+    public void savePlayer(Player player) {
+        playerDAO.save(player);
+    }
+
+    public Player getUserByPlayer(org.bukkit.entity.Player player)
+    {
+        Player du = playerDAO.findOne("uuid", player.getUniqueId().toString());
+        if (du == null)
+        {
+            du = new Player();
+            du.setUUID(player.getUniqueId().toString());
+            du.setIp("0.0.0.0");
+            du.setUsername(player.getName());
+            playerDAO.save(du);
+        }
+        return du;
+    }
+
+    public boolean doesPlayerHaveKit(org.bukkit.entity.Player player, Kits kit) {
+        Player user = getUserByPlayer(player);
+        return user.kits.contains(kit);
     }
 }

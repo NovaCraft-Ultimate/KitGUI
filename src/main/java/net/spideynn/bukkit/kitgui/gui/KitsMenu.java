@@ -5,6 +5,8 @@ import net.spideynn.bukkit.kitgui.guilib.events.ItemClickEvent;
 import net.spideynn.bukkit.kitgui.guilib.items.BackItem;
 import net.spideynn.bukkit.kitgui.guilib.items.MenuItem;
 import net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu;
+import net.spideynn.bukkit.kitgui.utils.Kits;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -39,6 +41,9 @@ class ArcherKit extends MenuItem {
         if (Main.choseKit.get(event.getPlayer())) {
             event.getPlayer().sendMessage(ChatColor.RED + "You already chose a kit! You can choose another one when you die.");
             event.setWillClose(true);
+
+        } if (!Main.db.doesPlayerHaveKit(event.getPlayer(), Kits.ARCHER)) {
+
         } else {
             event.setWillClose(true);
             Player p = event.getPlayer();
@@ -408,26 +413,5 @@ class TankKit extends MenuItem {
             p.getInventory().setBoots(i4);
             p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 999999, 1));
         }
-    }
-}
-
-class ConfirmBuyKitItem extends MenuItem {
-
-    public ConfirmBuyKitItem(String displayName, ItemStack icon, String... lore) {
-        super(displayName, icon, lore);
-    }
-}
-
-class BuyKitItem extends MenuItem {
-
-    public BuyKitItem(String displayName, ItemStack icon, String... lore) {
-        super(displayName, icon, lore);
-    }
-}
-
-class ConfirmBuyKitMenu extends ItemMenu{
-
-    public ConfirmBuyKitMenu(String name, Size size, JavaPlugin plugin, ItemMenu parent) {
-        super(name, size, plugin, parent);
     }
 }

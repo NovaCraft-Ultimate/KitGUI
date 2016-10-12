@@ -1,6 +1,7 @@
-package net.spideynn.bukkit.kitgui;
+package net.spideynn.bukkit.kitgui.utils;
 
 import me.robin.battlelevels.objects.BattlePlayer;
+import org.bukkit.entity.Player;
 
 public class Utils {
 
