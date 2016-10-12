@@ -1,16 +1,20 @@
-package net.spideynn.bukkit.kitgui;
+package net.spideynn.bukkit.kitgui.listeners;
 
+import net.spideynn.bukkit.kitgui.Main;
 import net.spideynn.bukkit.kitgui.gui.MainGUI;
+import net.spideynn.bukkit.kitgui.mongodb.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class Listeners implements Listener {
     @EventHandler
     public void onPlayerQuitEvent(PlayerQuitEvent event) {
+        Main.getInstance().getLogger().fine("Event triggered: PlayerQuitEvent.");
         try {
             Main.choseKit.remove(event.getPlayer());
         } catch (NullPointerException e) {
@@ -19,12 +23,16 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onPlayerJoinEvent(PlayerJoinEvent event) {
+    public void onPlayerLoginEvent(PlayerLoginEvent event) {
+        Main.getInstance().getLogger().fine("Event triggered: PlayerLoginEvent.");
         Main.choseKit.put(event.getPlayer(), false);
+        Main.getInstance().getLogger().info("Player joined, checking DB.");
+        Main.getInstance().getLogger().info(Main.db.getUserByPlayer(event.getPlayer()).toString());
     }
 
     @EventHandler
     public void onPlayerDeathEvent(PlayerDeathEvent event) {
+        Main.getInstance().getLogger().fine("Event triggered: PlayerDeathEvent.");
         if (Main.choseKit.get(event.getEntity())) Main.choseKit.put(event.getEntity(), false);
     }
 

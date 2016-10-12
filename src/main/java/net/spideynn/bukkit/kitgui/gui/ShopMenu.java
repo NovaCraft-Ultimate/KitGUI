@@ -10,17 +10,31 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class ShopMenu extends ItemMenu {
     public ShopMenu(JavaPlugin plugin, ItemMenu parent) {
-        super("Shop", Size.SIX_LINE, plugin, parent);
+        super("Shop [BETA]", Size.ONE_LINE, plugin, parent);
         this.setItem(53, new BackItem(Material.BARRIER));
         //TODO: Set up shop using credits from BattleLevels.
     }
 }
 
-class ShopMenuItem extends MenuItem {
+class ItemShopMenu extends ItemMenu {
 
-    int price;
+    public ItemShopMenu(String name, Size size, JavaPlugin plugin, ItemMenu parent) {
+        super(name, size, plugin, parent);
+    }
+}
 
-    public ShopMenuItem(String displayName, ItemStack icon, int itemPrice, String... lore) {
+class KitShopMenu extends ItemMenu {
+
+    public KitShopMenu(String name, Size size, JavaPlugin plugin, ItemMenu parent) {
+        super(name, size, plugin, parent);
+    }
+}
+
+class ItemShopMenuItem extends MenuItem {
+
+    private final int price;
+
+    public ItemShopMenuItem(String displayName, ItemStack icon, int itemPrice, String... lore) {
         super(displayName, icon, lore);
         price = itemPrice;
     }
