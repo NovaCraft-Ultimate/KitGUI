@@ -41,6 +41,7 @@ public class ItemMenu {
     private Size size;
     private MenuItem[] items;
     private ItemMenu parent;
+    private Player opener;
 
     /**
      * The {@link net.spideynn.bukkit.kitgui.guilib.items.StaticMenuItem} that appears in empty slots if {@link net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu#fillEmptySlots()} is called.
@@ -52,6 +53,7 @@ public class ItemMenu {
      * Creates an {@link net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu}.
      *
      * @param name   The name of the inventory.
+     * @param opener The player who opened the inventory.
      * @param size   The {@link net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu.Size} of the inventory.
      * @param plugin The {@link org.bukkit.plugin.java.JavaPlugin} instance.
      * @param parent The ItemMenu's parent.
@@ -200,6 +202,7 @@ public class ItemMenu {
                 inventory.setItem(i, null);
             }
         }
+        this.opener = player;
     }
 
     /**
