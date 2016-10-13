@@ -23,7 +23,6 @@ import net.spideynn.bukkit.kitgui.guilib.events.ItemClickEvent;
 import net.spideynn.bukkit.kitgui.guilib.items.MenuItem;
 import net.spideynn.bukkit.kitgui.guilib.items.StaticMenuItem;
 import org.bukkit.Bukkit;
-import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
@@ -111,6 +110,15 @@ public class ItemMenu {
      */
     public ItemMenu getParent() {
         return parent;
+    }
+
+    /**
+     * Gets the opener of the menu
+     *
+     * @return The opener of the menu.
+     */
+    public Player getOpener() {
+        return opener;
     }
 
     /**
