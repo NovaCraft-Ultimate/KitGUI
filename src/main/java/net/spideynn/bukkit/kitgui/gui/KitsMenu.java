@@ -6,7 +6,6 @@ import net.spideynn.bukkit.kitgui.guilib.items.BackItem;
 import net.spideynn.bukkit.kitgui.guilib.items.MenuItem;
 import net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu;
 import net.spideynn.bukkit.kitgui.utils.Kits;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -41,8 +40,6 @@ class ArcherKit extends MenuItem {
         if (Main.choseKit.get(event.getPlayer())) {
             event.getPlayer().sendMessage(ChatColor.RED + "You already chose a kit! You can choose another one when you die.");
             event.setWillClose(true);
-
-        } if (!Main.db.doesPlayerHaveKit(event.getPlayer(), Kits.ARCHER)) {
 
         } else {
             event.setWillClose(true);
@@ -98,6 +95,8 @@ class AssassinKit extends MenuItem{
         if (Main.choseKit.get(event.getPlayer())) {
             event.getPlayer().sendMessage(ChatColor.RED + "You already chose a kit! You can choose another one when you die.");
             event.setWillClose(true);
+        } if (!Main.db.doesPlayerHaveKit(event.getPlayer(), Kits.ASSASSIN)) {
+            event.getPlayer().sendMessage(ChatColor.RED + "You must purchase this kit in the shop before you can use it.");
         } else {
             event.setWillClose(true);
             Player p = event.getPlayer();
@@ -145,6 +144,8 @@ class AxesKit extends MenuItem{
         if (Main.choseKit.get(event.getPlayer())) {
             event.getPlayer().sendMessage(ChatColor.RED + "You already chose a kit! You can choose another one when you die.");
             event.setWillClose(true);
+        } if (!Main.db.doesPlayerHaveKit(event.getPlayer(), Kits.AXES)) {
+            event.getPlayer().sendMessage(ChatColor.RED + "You must purchase this kit in the shop before you can use it.");
         } else {
             event.setWillClose(true);
             Player p = event.getPlayer();
@@ -192,6 +193,8 @@ class CactiKit extends MenuItem {
         if (Main.choseKit.get(event.getPlayer())) {
             event.getPlayer().sendMessage(ChatColor.RED + "You already chose a kit! You can choose another one when you die.");
             event.setWillClose(true);
+        } if (!Main.db.doesPlayerHaveKit(event.getPlayer(), Kits.CACTI)) {
+            event.getPlayer().sendMessage(ChatColor.RED + "You must purchase this kit in the shop before you can use it.");
         } else {
             event.setWillClose(true);
             Player p = event.getPlayer();
@@ -252,6 +255,8 @@ class EndermanKit extends MenuItem {
         if (Main.choseKit.get(event.getPlayer())) {
             event.getPlayer().sendMessage(ChatColor.RED + "You already chose a kit! You can choose another one when you die.");
             event.setWillClose(true);
+        } if (!Main.db.doesPlayerHaveKit(event.getPlayer(), Kits.ENDERMAN)) {
+            event.getPlayer().sendMessage(ChatColor.RED + "You must purchase this kit in the shop before you can use it.");
         } else {
             event.setWillClose(true);
             Player p = event.getPlayer();
@@ -317,6 +322,8 @@ class SniperKit extends MenuItem {
         if (Main.choseKit.get(event.getPlayer())) {
             event.getPlayer().sendMessage(ChatColor.RED + "You already chose a kit! You can choose another one when you die.");
             event.setWillClose(true);
+        } if (!Main.db.doesPlayerHaveKit(event.getPlayer(), Kits.SNIPER)) {
+            event.getPlayer().sendMessage(ChatColor.RED + "You must purchase this kit in the shop before you can use it.");
         } else {
             event.setWillClose(true);
             Player p = event.getPlayer();
