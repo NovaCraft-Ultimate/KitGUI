@@ -52,7 +52,6 @@ public class ItemMenu {
      * Creates an {@link net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu}.
      *
      * @param name   The name of the inventory.
-     * @param opener The player who opened the inventory.
      * @param size   The {@link net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu.Size} of the inventory.
      * @param plugin The {@link org.bukkit.plugin.java.JavaPlugin} instance.
      * @param parent The ItemMenu's parent.
@@ -190,6 +189,7 @@ public class ItemMenu {
         if (player.getOpenInventory() != null) {
             Inventory inventory = player.getOpenInventory().getTopInventory();
             if (inventory.getHolder() instanceof MenuHolder && ((MenuHolder) inventory.getHolder()).getMenu().equals(this)) {
+                this.opener = player;
                 apply(inventory, player);
                 player.updateInventory();
             }
@@ -210,7 +210,6 @@ public class ItemMenu {
                 inventory.setItem(i, null);
             }
         }
-        this.opener = player;
     }
 
     /**
@@ -279,7 +278,7 @@ public class ItemMenu {
 
         private final int size;
 
-        private Size(int size) {
+        Size(int size) {
             this.size = size;
         }
 
