@@ -45,7 +45,6 @@ public class ItemMenu {
     /**
      * The {@link net.spideynn.bukkit.kitgui.guilib.items.StaticMenuItem} that appears in empty slots if {@link net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu#fillEmptySlots()} is called.
      */
-    @SuppressWarnings("deprecation")
     private static final MenuItem EMPTY_SLOT_ITEM = new StaticMenuItem("", new ItemStack(Material.STAINED_GLASS_PANE, 1));
 
     /**
@@ -184,7 +183,6 @@ public class ItemMenu {
      *
      * @param player The player to update the {@link net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu} for.
      */
-    @SuppressWarnings("deprecation")
     public void update(Player player) {
         if (player.getOpenInventory() != null) {
             Inventory inventory = player.getOpenInventory().getTopInventory();
@@ -215,7 +213,6 @@ public class ItemMenu {
     /**
      * Handles InventoryClickEvents for the {@link net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu}.
      */
-    @SuppressWarnings("deprecation")
     public void onInventoryClick(InventoryClickEvent event) {
         if (event.getClick() == ClickType.LEFT) {
             int slot = event.getRawSlot();

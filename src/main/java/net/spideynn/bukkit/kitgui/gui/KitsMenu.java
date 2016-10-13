@@ -16,15 +16,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.ArrayList;
+
 public class KitsMenu extends ItemMenu {
     public KitsMenu(JavaPlugin plugin, ItemMenu parent) {
         super("Kits", Size.ONE_LINE, plugin, parent);
         this.setItem(0, new ArcherKit());
-        this.setItem(1, new AssassinKit());
-        this.setItem(2, new AxesKit());
-        this.setItem(3, new CactiKit());
-        this.setItem(4, new EndermanKit());
-        this.setItem(5, new SniperKit());
+        this.setItem(1, new AssassinKit(Main.db.doesPlayerHaveKit(getOpener(), Kits.ASSASSIN)));
+        this.setItem(2, new AxesKit(Main.db.doesPlayerHaveKit(getOpener(), Kits.AXES)));
+        this.setItem(3, new CactiKit(Main.db.doesPlayerHaveKit(getOpener(), Kits.CACTI)));
+        this.setItem(4, new EndermanKit(Main.db.doesPlayerHaveKit(getOpener(), Kits.ENDERMAN)));
+        this.setItem(5, new SniperKit(Main.db.doesPlayerHaveKit(getOpener(), Kits.SNIPER)));
         this.setItem(6, new TankKit());
         this.setItem(8, new BackItem(Material.BARRIER));
     }
@@ -86,8 +88,12 @@ class ArcherKit extends MenuItem {
 }
 
 class AssassinKit extends MenuItem{
-    public AssassinKit() {
+    private final boolean hasBought;
+    public AssassinKit(boolean hasBought) {
         super(ChatColor.DARK_GREEN + "Assassin", new ItemStack(Material.STONE_SWORD), "");
+        this.hasBought = hasBought;
+        if (!hasBought)
+            setNameAndLore(getIcon(), ChatColor.DARK_GREEN + "Assassin " + ChatColor.RED + "(LOCKED)", null);
     }
 
     @Override
@@ -95,7 +101,7 @@ class AssassinKit extends MenuItem{
         if (Main.choseKit.get(event.getPlayer())) {
             event.getPlayer().sendMessage(ChatColor.RED + "You already chose a kit! You can choose another one when you die.");
             event.setWillClose(true);
-        } if (!Main.db.doesPlayerHaveKit(event.getPlayer(), Kits.ASSASSIN)) {
+        } if (!hasBought) {
             event.getPlayer().sendMessage(ChatColor.RED + "You must purchase this kit in the shop before you can use it.");
         } else {
             event.setWillClose(true);
@@ -135,7 +141,7 @@ class AssassinKit extends MenuItem{
 }
 
 class AxesKit extends MenuItem{
-    public AxesKit() {
+    public AxesKit(boolean hasBought) {
         super(ChatColor.DARK_GREEN + "Axes", new ItemStack(Material.WOOD_AXE), "");
     }
 
@@ -184,7 +190,7 @@ class AxesKit extends MenuItem{
 }
 
 class CactiKit extends MenuItem {
-    public CactiKit() {
+    public CactiKit(boolean hasBought) {
         super(ChatColor.DARK_GREEN + "Cacti", new ItemStack(Material.CACTUS), "");
     }
 
@@ -246,7 +252,7 @@ class CactiKit extends MenuItem {
 }
 
 class EndermanKit extends MenuItem {
-    public EndermanKit() {
+    public EndermanKit(boolean hasBought) {
         super(ChatColor.DARK_GREEN + "Enderman", new ItemStack(Material.EYE_OF_ENDER), "");
     }
 
@@ -308,7 +314,7 @@ class EndermanKit extends MenuItem {
 }
 
 class SniperKit extends MenuItem {
-    public SniperKit() {
+    public SniperKit(boolean hasBought) {
         super(ChatColor.DARK_GREEN + "Sniper", new ItemStack(Material.AIR), "");
         ItemStack bow = new ItemStack(Material.BOW);
         bow.addUnsafeEnchantment(Enchantment.LUCK, 1);
