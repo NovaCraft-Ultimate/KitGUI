@@ -45,7 +45,7 @@ public class Main extends JavaPlugin {
         if (label.equalsIgnoreCase("kitgui")) {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
-                MainGUI mainGUI = new MainGUI(this, player);
+                MainGUI mainGUI = new MainGUI(this);
                 mainGUI.open(player);
             }
         }
