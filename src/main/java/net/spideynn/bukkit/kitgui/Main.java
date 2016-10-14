@@ -69,6 +69,7 @@ public class Main extends JavaPlugin {
                 }
                 MainGUI mainGUI = new MainGUI(this, player);
                 mainGUI.open(player);
+                return true;
             }
         }
         return false;
