@@ -120,6 +120,13 @@ public class ItemMenu {
     }
 
     /**
+     * Sets the opener of the menu
+     */
+    public void setOpener(Player player) {
+        this.opener = player;
+    }
+
+    /**
      * Sets the parent of the {@link net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu}.
      *
      * @param parent The {@link net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu}'s parent.
@@ -187,7 +194,6 @@ public class ItemMenu {
         if (player.getOpenInventory() != null) {
             Inventory inventory = player.getOpenInventory().getTopInventory();
             if (inventory.getHolder() instanceof MenuHolder && ((MenuHolder) inventory.getHolder()).getMenu().equals(this)) {
-                this.opener = player;
                 apply(inventory, player);
                 player.updateInventory();
             }

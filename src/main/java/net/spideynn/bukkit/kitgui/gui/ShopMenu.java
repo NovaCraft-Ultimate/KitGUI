@@ -8,28 +8,32 @@ import net.spideynn.bukkit.kitgui.guilib.items.SubMenuItem;
 import net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class ShopMenu extends ItemMenu {
-    public ShopMenu(JavaPlugin plugin, ItemMenu parent) {
+    public ShopMenu(JavaPlugin plugin, ItemMenu parent, Player opener) {
         super("Shop [BETA]", Size.ONE_LINE, plugin, parent);
-        this.setItem(53, new BackItem(Material.BARRIER));
+        setOpener(opener);
+        this.setItem(8, new BackItem(Material.BARRIER));
         this.setItem(3, new ItemShopItem());
-        this.setItem(6, new KitShopItem());
+        this.setItem(6, new KitShopItem(opener));
     }
 }
 
 class KitShopItem extends MenuItem {
-    public KitShopItem() {
+    public KitShopItem(Player opener) {
         super(ChatColor.GOLD + "Kit Shop", new ItemStack(Material.DIAMOND_AXE));
     }
 }
 
-class ItemShopItem extends SubMenuItem {
+class ItemShopItem extends MenuItem {
+
+    //TODO: Fix loop thing on back menu system.
 
     public ItemShopItem() {
-        super(Main.getInstance(), ChatColor.GREEN + "Item Shop", new ItemStack(Material.EMERALD), new ShopMenu(Main.getInstance(), new MainGUI(Main.getInstance())));
+        super(ChatColor.GREEN + "Item Shop", new ItemStack(Material.EMERALD));
     }
 
     @Override

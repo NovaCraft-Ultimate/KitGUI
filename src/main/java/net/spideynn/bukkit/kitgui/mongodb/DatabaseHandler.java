@@ -2,6 +2,7 @@ package net.spideynn.bukkit.kitgui.mongodb;
 
 import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
+import net.spideynn.bukkit.kitgui.Main;
 import net.spideynn.bukkit.kitgui.utils.Kits;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
@@ -49,6 +50,6 @@ public class DatabaseHandler {
 
     public boolean doesPlayerHaveKit(org.bukkit.entity.Player player, Kits kit) {
         Player user = getUserByPlayer(player);
-        return user.kits.contains(kit);
+        return user.kits.contains(kit.getKitNum());
     }
 }
