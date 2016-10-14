@@ -179,7 +179,7 @@ class AxesKit extends MenuItem{
             Player p = event.getPlayer();
             Main.choseKit.put(p, true);
 
-            p.sendMessage(ChatColor.DARK_GREEN + "You have selected the kit Axer.");
+            p.sendMessage(ChatColor.DARK_GREEN + "You have selected the kit Axes.");
 
             for (PotionEffect i2 : p.getActivePotionEffects()) {
                 p.removePotionEffect(i2.getType());
