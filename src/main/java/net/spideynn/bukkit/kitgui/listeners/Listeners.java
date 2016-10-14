@@ -24,15 +24,11 @@ public class Listeners implements Listener {
 
     @EventHandler
     public void onPlayerLoginEvent(PlayerLoginEvent event) {
-        Main.getInstance().getLogger().fine("Event triggered: PlayerLoginEvent.");
         Main.choseKit.put(event.getPlayer(), false);
-        Main.getInstance().getLogger().info("Player joined, checking DB.");
-        Main.getInstance().getLogger().info(Main.db.getUserByPlayer(event.getPlayer()).toString());
     }
 
     @EventHandler
     public void onPlayerDeathEvent(PlayerDeathEvent event) {
-        Main.getInstance().getLogger().fine("Event triggered: PlayerDeathEvent.");
         if (Main.choseKit.get(event.getEntity())) Main.choseKit.put(event.getEntity(), false);
     }
 
