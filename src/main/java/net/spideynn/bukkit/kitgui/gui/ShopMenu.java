@@ -6,11 +6,15 @@ import net.spideynn.bukkit.kitgui.guilib.items.BackItem;
 import net.spideynn.bukkit.kitgui.guilib.items.MenuItem;
 import net.spideynn.bukkit.kitgui.guilib.items.SubMenuItem;
 import net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu;
+import net.spideynn.bukkit.kitgui.utils.Kits;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.ArrayList;
 
 public class ShopMenu extends ItemMenu {
     public ShopMenu(JavaPlugin plugin, ItemMenu parent, Player opener) {
@@ -52,8 +56,38 @@ class ItemShopMenu extends ItemMenu {
 
 class KitShopMenu extends ItemMenu {
 
-    public KitShopMenu(String name, Size size, JavaPlugin plugin, ItemMenu parent) {
+    public KitShopMenu(String name, Size size, JavaPlugin plugin, ItemMenu parent, Player opener) {
         super(name, size, plugin, parent);
+        net.spideynn.bukkit.kitgui.mongodb.Player user = Main.db.getUserByPlayer(opener);
+        //for (Kits kit : Kits.getKitsbyArray(Main.db.getUserByPlayer(opener).kits.toArray(new Integer[user.kits.size()])))
+        this.setItem(0, new KitShopMenuItem("Assassin", new ItemStack(Material.STONE_SWORD), user.kits.contains(Kits.ASSASSIN.getKitNum()), 100));
+    }
+}
+
+class KitShopMenuItem extends MenuItem {
+    boolean hasBought;
+    int cost;
+
+    public KitShopMenuItem(String displayName, ItemStack icon, boolean hasBought, int cost, String... lore) {
+        super(displayName, icon, lore);
+    }
+
+    @Override
+    public ItemStack getFinalIcon(Player player) {
+        ItemStack icon = getIcon();
+        ItemMeta iconMeta = icon.getItemMeta();
+        if (hasBought) {
+            iconMeta.setDisplayName(ChatColor.GREEN + getDisplayName());
+            ArrayList<String> list = new ArrayList<>();
+            list.add(ChatColor.GREEN + "[PURCHASED]");
+            iconMeta.setLore(list);
+        } else {
+            iconMeta.setDisplayName(ChatColor.RED + getDisplayName());
+            ArrayList<String> list = new ArrayList<>();
+            list.add(ChatColor.RED + "[NOT PURCHASED]");
+            iconMeta.setLore(list);
+        }
+        return icon;
     }
 }
 
