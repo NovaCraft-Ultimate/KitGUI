@@ -9,4 +9,8 @@ public class Utils {
         if (player.getScore() >= cost)
             player.setScore(player.getScore() - cost);
     }
+
+    public static void confirmKitPurchase(Kits kits, int cost, net.spideynn.bukkit.kitgui.mongodb.Player playerDB, Player player) {
+
+    }
 }

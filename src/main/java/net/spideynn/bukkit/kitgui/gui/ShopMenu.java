@@ -7,6 +7,7 @@ import net.spideynn.bukkit.kitgui.guilib.items.MenuItem;
 import net.spideynn.bukkit.kitgui.guilib.items.SubMenuItem;
 import net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu;
 import net.spideynn.bukkit.kitgui.utils.Kits;
+import net.spideynn.bukkit.kitgui.utils.Utils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -65,11 +66,14 @@ class KitShopMenu extends ItemMenu {
 }
 
 class KitShopMenuItem extends MenuItem {
+    Kits kit;
     boolean hasBought;
     int cost;
 
     public KitShopMenuItem(String displayName, ItemStack icon, boolean hasBought, int cost, String... lore) {
         super(displayName, icon, lore);
+        this.hasBought = hasBought;
+        this.cost = cost;
     }
 
     @Override
@@ -84,10 +88,19 @@ class KitShopMenuItem extends MenuItem {
         } else {
             iconMeta.setDisplayName(ChatColor.RED + getDisplayName());
             ArrayList<String> list = new ArrayList<>();
-            list.add(ChatColor.RED + "[NOT PURCHASED]");
+            list.add(ChatColor.BLUE + "COST: " + ChatColor.GOLD + cost);
             iconMeta.setLore(list);
         }
         return icon;
+    }
+
+    @Override
+    public void onItemClick(ItemClickEvent event) {
+        if (hasBought) {
+            event.setWillClose(true);
+            return;
+        }
+        Utils.confirmKitPurchase();
     }
 }
 
