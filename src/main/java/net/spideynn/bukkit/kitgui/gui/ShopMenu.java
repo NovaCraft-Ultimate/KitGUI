@@ -1,14 +1,19 @@
 package net.spideynn.bukkit.kitgui.gui;
 
+import me.robin.battlelevels.api.BattleLevelsAPI;
+import me.robin.battlelevels.core.BattleLevels;
+import me.robin.battlelevels.objects.BattlePlayer;
 import net.spideynn.bukkit.kitgui.Main;
 import net.spideynn.bukkit.kitgui.guilib.events.ItemClickEvent;
 import net.spideynn.bukkit.kitgui.guilib.items.BackItem;
 import net.spideynn.bukkit.kitgui.guilib.items.MenuItem;
+import net.spideynn.bukkit.kitgui.guilib.items.StaticMenuItem;
 import net.spideynn.bukkit.kitgui.guilib.items.SubMenuItem;
 import net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu;
 import net.spideynn.bukkit.kitgui.utils.Kits;
 import net.spideynn.bukkit.kitgui.utils.Utils;
 import org.bukkit.ChatColor;
+import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -100,7 +105,6 @@ class KitShopMenuItem extends MenuItem {
             event.setWillClose(true);
             return;
         }
-        Utils.confirmKitPurchase();
     }
 }
 
@@ -116,5 +120,43 @@ class ItemShopMenuItem extends MenuItem {
     @Override
     public void onItemClick(ItemClickEvent event) {
 
+    }
+}
+
+class KitShopConfirmMenu extends ItemMenu {
+
+    public KitShopConfirmMenu(JavaPlugin plugin, int cost, Kits kit, Player player, ItemStack itemToBuy) {
+        super("Confirm Purchase", Size.ONE_LINE, plugin);
+        this.setItem(0, new KitShopConfirmItem(kit, cost));
+        this.setItem(3, new StaticMenuItem(itemToBuy.getItemMeta().getDisplayName(), itemToBuy));
+        this.setItem(7, new KitShopCancelItem());
+    }
+}
+
+class KitShopConfirmItem extends MenuItem {
+    final Kits kit;
+    final int cost;
+
+    public KitShopConfirmItem(Kits kit, int cost) {
+        super(ChatColor.GREEN + "CONFIRM", new ItemStack(Material.WOOL, 1, DyeColor.LIME.getData()));
+        this.kit = kit;
+        this.cost = cost;
+    }
+
+    @Override
+    public void onItemClick(ItemClickEvent event) {
+        Utils.buyKit(BattleLevelsAPI.findPlayer(event.getPlayer().getUniqueId().toString()), event.getPlayer(), cost, kit);
+    }
+}
+
+class KitShopCancelItem extends MenuItem {
+
+    public KitShopCancelItem() {
+        super(ChatColor.RED + "CANCEL", new ItemStack(Material.WOOL, 1, DyeColor.RED.getData()));
+    }
+
+    @Override
+    public void onItemClick(ItemClickEvent event) {
+        event.setWillClose(true);
     }
 }

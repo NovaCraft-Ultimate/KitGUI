@@ -13,6 +13,7 @@ import java.util.HashMap;
 
 public class MainGUI extends ItemMenu {
     public static HashMap<Player, Boolean> addFriendPrompt = new HashMap<>();
+    public static HashMap<Player, Boolean> confirmKitBuy = new HashMap<>();
 
     public MainGUI(JavaPlugin plugin, Player opener) {
         super(ChatColor.DARK_GRAY + "KitPvP Menu", Size.THREE_LINE, plugin);
