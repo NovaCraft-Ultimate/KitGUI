@@ -14,12 +14,12 @@ import java.util.HashMap;
 public class MainGUI extends ItemMenu {
     public static HashMap<Player, Boolean> addFriendPrompt = new HashMap<Player, Boolean>();
 
-    public MainGUI(JavaPlugin plugin) {
-        super(ChatColor.DARK_GRAY + "KitPvP Menu", Size.THREE_LINE, plugin);
-        this.setItem(10, new SubMenuItem(Main.getInstance(), ChatColor.RED + "Kits", new ItemStack(Material.DIAMOND_SWORD), new KitsMenu(Main.getInstance(), this)));
-        this.setItem(12, new SubMenuItem(Main.getInstance(), ChatColor.AQUA + "Rank", new ItemStack(Material.PAPER), new RankMenu(Main.getInstance(), this)));
-        this.setItem(14, new SubMenuItem(Main.getInstance(), ChatColor.GREEN + "Shop", new ItemStack(Material.EMERALD), new ShopMenu(Main.getInstance(), this)));
-        this.setItem(16, new SubMenuItem(Main.getInstance(), ChatColor.DARK_PURPLE + "Friends [BETA]", new ItemStack(Material.ENCHANTED_BOOK), new FriendsMenu(Main.getInstance(), this)));
+    public MainGUI(JavaPlugin plugin, Player opener) {
+        super(ChatColor.DARK_GRAY + "KitPvP Menu", Size.THREE_LINE, plugin, opener);
+        this.setItem(10, new SubMenuItem(Main.getInstance(), ChatColor.RED + "Kits", new ItemStack(Material.DIAMOND_SWORD), new KitsMenu(Main.getInstance(), this, getOpener())));
+        this.setItem(12, new SubMenuItem(Main.getInstance(), ChatColor.AQUA + "Rank", new ItemStack(Material.PAPER), new RankMenu(Main.getInstance(), this, getOpener())));
+        this.setItem(14, new SubMenuItem(Main.getInstance(), ChatColor.GREEN + "Shop", new ItemStack(Material.EMERALD), new ShopMenu(Main.getInstance(), this, getOpener())));
+        this.setItem(16, new SubMenuItem(Main.getInstance(), ChatColor.DARK_PURPLE + "Friends [BETA]", new ItemStack(Material.ENCHANTED_BOOK), new FriendsMenu(Main.getInstance(), this, getOpener())));
         this.fillEmptySlots();
     }
 }

@@ -6,12 +6,13 @@ import net.spideynn.bukkit.kitgui.guilib.items.MenuItem;
 import net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class FriendsMenu extends ItemMenu {
-    public FriendsMenu(JavaPlugin plugin, ItemMenu parent) {
-        super("Friends", Size.ONE_LINE, plugin, parent);
+    public FriendsMenu(JavaPlugin plugin, ItemMenu parent, Player opener) {
+        super("Friends", Size.ONE_LINE, plugin, parent, opener);
         this.setItem(8, new BackItem(Material.BARRIER));
         this.setItem(0, new AddFriendItem());
     }

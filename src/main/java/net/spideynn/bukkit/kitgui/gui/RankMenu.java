@@ -7,12 +7,13 @@ import net.spideynn.bukkit.kitgui.guilib.items.StaticMenuItem;
 import net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class RankMenu extends ItemMenu {
-    public RankMenu(JavaPlugin plugin, ItemMenu parent) {
-        super("Rank", Size.ONE_LINE, plugin, parent);
+    public RankMenu(JavaPlugin plugin, ItemMenu parent, Player opener) {
+        super("Rank", Size.ONE_LINE, plugin, parent, opener);
         this.setItem(8, new BackItem(Material.BARRIER));
         BattlePlayer player = BattleLevelsAPI.findPlayer(this.getOpener().getUniqueId());
         this.setItem(0, new StaticMenuItem(ChatColor.GRAY + "Level:", new ItemStack(Material.EXP_BOTTLE), ChatColor.RESET + "" + ChatColor.GOLD + "" + player.getLevel()));

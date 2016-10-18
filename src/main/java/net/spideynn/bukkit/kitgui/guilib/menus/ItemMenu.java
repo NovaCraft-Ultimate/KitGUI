@@ -57,12 +57,13 @@ public class ItemMenu {
      * @param plugin The {@link org.bukkit.plugin.java.JavaPlugin} instance.
      * @param parent The ItemMenu's parent.
      */
-    public ItemMenu(String name, Size size, JavaPlugin plugin, ItemMenu parent) {
+    public ItemMenu(String name, Size size, JavaPlugin plugin, ItemMenu parent, Player opener) {
         this.plugin = plugin;
         this.name = name;
         this.size = size;
         this.items = new MenuItem[size.getSize()];
         this.parent = parent;
+        this.opener = opener;
     }
 
     /**
@@ -72,8 +73,8 @@ public class ItemMenu {
      * @param size   The {@link net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu.Size} of the inventory.
      * @param plugin The Plugin instance.
      */
-    public ItemMenu(String name, Size size, JavaPlugin plugin) {
-        this(name, size, plugin, null);
+    public ItemMenu(String name, Size size, JavaPlugin plugin, Player opener) {
+        this(name, size, plugin, null, opener);
     }
 
     /**
@@ -191,6 +192,7 @@ public class ItemMenu {
             Inventory inventory = player.getOpenInventory().getTopInventory();
             if (inventory.getHolder() instanceof MenuHolder && ((MenuHolder) inventory.getHolder()).getMenu().equals(this)) {
                 apply(inventory, player);
+                opener = player;
                 player.updateInventory();
             }
         }

@@ -17,8 +17,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class KitsMenu extends ItemMenu {
-    public KitsMenu(JavaPlugin plugin, ItemMenu parent) {
-        super("Kits", Size.ONE_LINE, plugin, parent);
+    public KitsMenu(JavaPlugin plugin, ItemMenu parent, Player opener) {
+        super("Kits", Size.ONE_LINE, plugin, parent, opener);
         this.setItem(0, new ArcherKit());
         this.setItem(1, new AssassinKit());
         this.setItem(2, new AxesKit());
