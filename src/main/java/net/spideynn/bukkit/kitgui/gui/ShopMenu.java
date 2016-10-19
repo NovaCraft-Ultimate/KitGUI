@@ -73,6 +73,7 @@ class KitShopMenu extends ItemMenu {
     }
 }
 
+
 class KitShopMenuItem extends MenuItem {
     final Kits kit;
     final boolean hasBought;
@@ -123,33 +124,33 @@ class KitShopConfirmMenu extends ItemMenu {
         this.setItem(3, new StaticMenuItem(itemToBuy.getItemMeta().getDisplayName(), itemToBuy));
         this.setItem(7, new KitShopCancelItem());
     }
-}
 
-class KitShopConfirmItem extends MenuItem {
-    final Kits kit;
-    final int cost;
+    class KitShopConfirmItem extends MenuItem {
+        final Kits kit;
+        final int cost;
 
-    public KitShopConfirmItem(Kits kit, int cost) {
-        super(ChatColor.GREEN + "CONFIRM", new ItemStack(Material.WOOL, 1, DyeColor.LIME.getData()));
-        this.kit = kit;
-        this.cost = cost;
+        public KitShopConfirmItem(Kits kit, int cost) {
+            super(ChatColor.GREEN + "CONFIRM", new ItemStack(Material.WOOL, 1, DyeColor.LIME.getData()));
+            this.kit = kit;
+            this.cost = cost;
+        }
+
+        @Override
+        public void onItemClick(ItemClickEvent event) {
+            Utils.buyKit(BattleLevelsAPI.findPlayer(event.getPlayer().getUniqueId().toString()), event.getPlayer(), cost, kit);
+        }
     }
 
-    @Override
-    public void onItemClick(ItemClickEvent event) {
-        Utils.buyKit(BattleLevelsAPI.findPlayer(event.getPlayer().getUniqueId().toString()), event.getPlayer(), cost, kit);
-    }
-}
+    class KitShopCancelItem extends MenuItem {
 
-class KitShopCancelItem extends MenuItem {
+        public KitShopCancelItem() {
+            super(ChatColor.RED + "CANCEL", new ItemStack(Material.WOOL, 1, DyeColor.RED.getData()));
+        }
 
-    public KitShopCancelItem() {
-        super(ChatColor.RED + "CANCEL", new ItemStack(Material.WOOL, 1, DyeColor.RED.getData()));
-    }
-
-    @Override
-    public void onItemClick(ItemClickEvent event) {
-        event.setWillClose(true);
+        @Override
+        public void onItemClick(ItemClickEvent event) {
+            event.setWillClose(true);
+        }
     }
 }
 
