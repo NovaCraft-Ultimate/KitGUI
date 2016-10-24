@@ -21,9 +21,7 @@ public class Main extends JavaPlugin {
     public Logger log = getLogger();
     public static HashMap<Player, Boolean> choseKit = new HashMap<Player, Boolean>();
     public static DatabaseHandler db = new DatabaseHandler(27017);
-
     private static JavaPlugin instance;
-    /// TODO: BattleLevels API https://github.com/RobiRami/BattleLevels/wiki
 
     @Override
     public void onDisable() {
