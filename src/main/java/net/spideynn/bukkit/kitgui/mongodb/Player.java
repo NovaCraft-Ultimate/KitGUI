@@ -42,8 +42,17 @@ public class Player {
         ipHistory.add(ip);
     }
 
+    public void addFriend(org.bukkit.entity.Player friend) {
+        friends.add(friend.getUniqueId().toString());
+    }
+
+    public void removeFriend(org.bukkit.entity.Player friend) {
+        friends.remove(friend.getUniqueId().toString());
+    }
+
     public void setUsername(String username) {
         this.username = username;
+        nameHistory.add(username);
     }
 
     public String toString() {

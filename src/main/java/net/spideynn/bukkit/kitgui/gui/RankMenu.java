@@ -13,7 +13,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class RankMenu extends ItemMenu {
     public RankMenu(JavaPlugin plugin, ItemMenu parent, Player opener) {
-        super("Rank", Size.ONE_LINE, plugin, parent, opener);
+        super("Rank", Size.ONE_LINE, plugin, parent);
+        setOpener(opener);
         this.setItem(8, new BackItem(Material.BARRIER));
         BattlePlayer player = BattleLevelsAPI.findPlayer(this.getOpener().getUniqueId());
         this.setItem(0, new StaticMenuItem(ChatColor.GRAY + "Level:", new ItemStack(Material.EXP_BOTTLE), ChatColor.RESET + "" + ChatColor.GOLD + "" + player.getLevel()));

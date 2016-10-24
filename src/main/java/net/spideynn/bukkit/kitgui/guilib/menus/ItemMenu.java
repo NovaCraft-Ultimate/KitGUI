@@ -45,25 +45,22 @@ public class ItemMenu {
     /**
      * The {@link net.spideynn.bukkit.kitgui.guilib.items.StaticMenuItem} that appears in empty slots if {@link net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu#fillEmptySlots()} is called.
      */
-    @SuppressWarnings("deprecation")
     private static final MenuItem EMPTY_SLOT_ITEM = new StaticMenuItem("", new ItemStack(Material.STAINED_GLASS_PANE, 1));
 
     /**
      * Creates an {@link net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu}.
      *
      * @param name   The name of the inventory.
-     * @param opener The player who opened the inventory.
      * @param size   The {@link net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu.Size} of the inventory.
      * @param plugin The {@link org.bukkit.plugin.java.JavaPlugin} instance.
      * @param parent The ItemMenu's parent.
      */
-    public ItemMenu(String name, Size size, JavaPlugin plugin, ItemMenu parent, Player opener) {
+    public ItemMenu(String name, Size size, JavaPlugin plugin, ItemMenu parent) {
         this.plugin = plugin;
         this.name = name;
         this.size = size;
         this.items = new MenuItem[size.getSize()];
         this.parent = parent;
-        this.opener = opener;
     }
 
     /**
@@ -73,8 +70,8 @@ public class ItemMenu {
      * @param size   The {@link net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu.Size} of the inventory.
      * @param plugin The Plugin instance.
      */
-    public ItemMenu(String name, Size size, JavaPlugin plugin, Player opener) {
-        this(name, size, plugin, null, opener);
+    public ItemMenu(String name, Size size, JavaPlugin plugin) {
+        this(name, size, plugin, null);
     }
 
     /**
@@ -120,6 +117,13 @@ public class ItemMenu {
      */
     public Player getOpener() {
         return opener;
+    }
+
+    /**
+     * Sets the opener of the menu
+     */
+    public void setOpener(Player player) {
+        this.opener = player;
     }
 
     /**
@@ -186,13 +190,11 @@ public class ItemMenu {
      *
      * @param player The player to update the {@link net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu} for.
      */
-    @SuppressWarnings("deprecation")
     public void update(Player player) {
         if (player.getOpenInventory() != null) {
             Inventory inventory = player.getOpenInventory().getTopInventory();
             if (inventory.getHolder() instanceof MenuHolder && ((MenuHolder) inventory.getHolder()).getMenu().equals(this)) {
                 apply(inventory, player);
-                opener = player;
                 player.updateInventory();
             }
         }
@@ -212,13 +214,11 @@ public class ItemMenu {
                 inventory.setItem(i, null);
             }
         }
-        this.opener = player;
     }
 
     /**
      * Handles InventoryClickEvents for the {@link net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu}.
      */
-    @SuppressWarnings("deprecation")
     public void onInventoryClick(InventoryClickEvent event) {
         if (event.getClick() == ClickType.LEFT) {
             int slot = event.getRawSlot();
@@ -281,7 +281,7 @@ public class ItemMenu {
 
         private final int size;
 
-        private Size(int size) {
+        Size(int size) {
             this.size = size;
         }
 

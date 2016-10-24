@@ -6,6 +6,7 @@ import net.spideynn.bukkit.kitgui.guilib.items.BackItem;
 import net.spideynn.bukkit.kitgui.guilib.items.MenuItem;
 import net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu;
 import net.spideynn.bukkit.kitgui.utils.Kits;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -16,9 +17,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.ArrayList;
+
 public class KitsMenu extends ItemMenu {
     public KitsMenu(JavaPlugin plugin, ItemMenu parent, Player opener) {
-        super("Kits", Size.ONE_LINE, plugin, parent, opener);
+        super("Kits", Size.ONE_LINE, plugin, parent);
+        setOpener(opener);
         this.setItem(0, new ArcherKit());
         this.setItem(1, new AssassinKit());
         this.setItem(2, new AxesKit());
@@ -91,11 +95,23 @@ class AssassinKit extends MenuItem{
     }
 
     @Override
+    public ItemStack getFinalIcon(Player player) {
+        ItemStack finalIcon = super.getFinalIcon(player);
+        if (!Main.db.doesPlayerHaveKit(player, Kits.ASSASSIN)) {
+            ItemMeta meta = finalIcon.getItemMeta();
+            meta.setDisplayName(ChatColor.DARK_GREEN + "Assassin " + ChatColor.RED + "(LOCKED)");
+            finalIcon.setItemMeta(meta);
+        }
+        return finalIcon;
+    }
+
+    @Override
     public void onItemClick(ItemClickEvent event) {
         if (Main.choseKit.get(event.getPlayer())) {
             event.getPlayer().sendMessage(ChatColor.RED + "You already chose a kit! You can choose another one when you die.");
             event.setWillClose(true);
         } if (!Main.db.doesPlayerHaveKit(event.getPlayer(), Kits.ASSASSIN)) {
+            event.setWillClose(true);
             event.getPlayer().sendMessage(ChatColor.RED + "You must purchase this kit in the shop before you can use it.");
         } else {
             event.setWillClose(true);
@@ -140,18 +156,30 @@ class AxesKit extends MenuItem{
     }
 
     @Override
+    public ItemStack getFinalIcon(Player player) {
+        ItemStack finalIcon = super.getFinalIcon(player);
+        if (!Main.db.doesPlayerHaveKit(player, Kits.AXES)) {
+            ItemMeta meta = finalIcon.getItemMeta();
+            meta.setDisplayName(ChatColor.DARK_GREEN + "Axes " + ChatColor.RED + "(LOCKED)");
+            finalIcon.setItemMeta(meta);
+        }
+        return finalIcon;
+    }
+
+    @Override
     public void onItemClick(ItemClickEvent event) {
         if (Main.choseKit.get(event.getPlayer())) {
             event.getPlayer().sendMessage(ChatColor.RED + "You already chose a kit! You can choose another one when you die.");
             event.setWillClose(true);
         } if (!Main.db.doesPlayerHaveKit(event.getPlayer(), Kits.AXES)) {
+            event.setWillClose(true);
             event.getPlayer().sendMessage(ChatColor.RED + "You must purchase this kit in the shop before you can use it.");
         } else {
             event.setWillClose(true);
             Player p = event.getPlayer();
             Main.choseKit.put(p, true);
 
-            p.sendMessage(ChatColor.DARK_GREEN + "You have selected the kit Axer.");
+            p.sendMessage(ChatColor.DARK_GREEN + "You have selected the kit Axes.");
 
             for (PotionEffect i2 : p.getActivePotionEffects()) {
                 p.removePotionEffect(i2.getType());
@@ -189,11 +217,23 @@ class CactiKit extends MenuItem {
     }
 
     @Override
+    public ItemStack getFinalIcon(Player player) {
+        ItemStack finalIcon = super.getFinalIcon(player);
+        if (!Main.db.doesPlayerHaveKit(player, Kits.CACTI)) {
+            ItemMeta meta = finalIcon.getItemMeta();
+            meta.setDisplayName(ChatColor.DARK_GREEN + "Cacti " + ChatColor.RED + "(LOCKED)");
+            finalIcon.setItemMeta(meta);
+        }
+        return finalIcon;
+    }
+
+    @Override
     public void onItemClick(ItemClickEvent event) {
         if (Main.choseKit.get(event.getPlayer())) {
             event.getPlayer().sendMessage(ChatColor.RED + "You already chose a kit! You can choose another one when you die.");
             event.setWillClose(true);
         } if (!Main.db.doesPlayerHaveKit(event.getPlayer(), Kits.CACTI)) {
+            event.setWillClose(true);
             event.getPlayer().sendMessage(ChatColor.RED + "You must purchase this kit in the shop before you can use it.");
         } else {
             event.setWillClose(true);
@@ -251,11 +291,23 @@ class EndermanKit extends MenuItem {
     }
 
     @Override
+    public ItemStack getFinalIcon(Player player) {
+        ItemStack finalIcon = super.getFinalIcon(player);
+        if (!Main.db.doesPlayerHaveKit(player, Kits.ENDERMAN)) {
+            ItemMeta meta = finalIcon.getItemMeta();
+            meta.setDisplayName(ChatColor.DARK_GREEN + "Enderman " + ChatColor.RED + "(LOCKED)");
+            finalIcon.setItemMeta(meta);
+        }
+        return finalIcon;
+    }
+
+    @Override
     public void onItemClick(ItemClickEvent event) {
         if (Main.choseKit.get(event.getPlayer())) {
             event.getPlayer().sendMessage(ChatColor.RED + "You already chose a kit! You can choose another one when you die.");
             event.setWillClose(true);
         } if (!Main.db.doesPlayerHaveKit(event.getPlayer(), Kits.ENDERMAN)) {
+            event.setWillClose(true);
             event.getPlayer().sendMessage(ChatColor.RED + "You must purchase this kit in the shop before you can use it.");
         } else {
             event.setWillClose(true);
@@ -318,11 +370,23 @@ class SniperKit extends MenuItem {
     }
 
     @Override
+    public ItemStack getFinalIcon(Player player) {
+        ItemStack finalIcon = super.getFinalIcon(player);
+        if (!Main.db.doesPlayerHaveKit(player, Kits.SNIPER)) {
+            ItemMeta meta = finalIcon.getItemMeta();
+            meta.setDisplayName(ChatColor.DARK_GREEN + "Sniper " + ChatColor.RED + "(LOCKED)");
+            finalIcon.setItemMeta(meta);
+        }
+        return finalIcon;
+    }
+
+    @Override
     public void onItemClick(ItemClickEvent event) {
         if (Main.choseKit.get(event.getPlayer())) {
             event.getPlayer().sendMessage(ChatColor.RED + "You already chose a kit! You can choose another one when you die.");
             event.setWillClose(true);
         } if (!Main.db.doesPlayerHaveKit(event.getPlayer(), Kits.SNIPER)) {
+            event.setWillClose(true);
             event.getPlayer().sendMessage(ChatColor.RED + "You must purchase this kit in the shop before you can use it.");
         } else {
             event.setWillClose(true);
@@ -365,7 +429,7 @@ class SniperKit extends MenuItem {
 
 class TankKit extends MenuItem {
     public TankKit() {
-        super(ChatColor.DARK_GREEN + "TankKit", new ItemStack(Material.DIAMOND_CHESTPLATE), "");
+        super(ChatColor.DARK_GREEN + "Tank", new ItemStack(Material.DIAMOND_CHESTPLATE), "");
     }
 
     @Override

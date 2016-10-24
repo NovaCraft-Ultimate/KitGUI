@@ -1,8 +1,6 @@
 package net.spideynn.bukkit.kitgui.gui;
 
 import me.robin.battlelevels.api.BattleLevelsAPI;
-import me.robin.battlelevels.core.BattleLevels;
-import me.robin.battlelevels.objects.BattlePlayer;
 import net.spideynn.bukkit.kitgui.Main;
 import net.spideynn.bukkit.kitgui.guilib.events.ItemClickEvent;
 import net.spideynn.bukkit.kitgui.guilib.items.BackItem;
@@ -24,21 +22,17 @@ import java.util.ArrayList;
 
 public class ShopMenu extends ItemMenu {
     public ShopMenu(JavaPlugin plugin, ItemMenu parent, Player opener) {
-        super("Shop [BETA]", Size.ONE_LINE, plugin, parent, opener);
+        super("Shop [BETA]", Size.ONE_LINE, plugin, parent);
+        setOpener(opener);
         this.setItem(8, new BackItem(Material.BARRIER));
         this.setItem(3, new ItemShopItem());
-        this.setItem(6, new KitShopItem());
+        this.setItem(6, new KitShopItem(opener));
     }
 }
 
 class KitShopItem extends MenuItem {
-    public KitShopItem() {
+    public KitShopItem(Player opener) {
         super(ChatColor.GOLD + "Kit Shop", new ItemStack(Material.DIAMOND_AXE));
-    }
-
-    @Override
-    public void onItemClick(ItemClickEvent event) {
-        new KitShopMenu(Main.getInstance(), new ShopMenu(Main.getInstance(), new MainGUI(Main.getInstance(), event.getPlayer()), event.getPlayer()), event.getPlayer()).open(event.getPlayer());
     }
 }
 
@@ -58,8 +52,8 @@ class ItemShopItem extends MenuItem {
 
 class ItemShopMenu extends ItemMenu {
 
-    public ItemShopMenu(String name, Size size, JavaPlugin plugin, ItemMenu parent, Player opener) {
-        super(name, size, plugin, parent, opener);
+    public ItemShopMenu(String name, Size size, JavaPlugin plugin, ItemMenu parent) {
+        super(name, size, plugin, parent);
         //TODO: Set up shop using credits from BattleLevels.
     }
 }
@@ -67,7 +61,7 @@ class ItemShopMenu extends ItemMenu {
 class KitShopMenu extends ItemMenu {
 
     public KitShopMenu(JavaPlugin plugin, ItemMenu parent, Player opener) {
-        super(ChatColor.BLUE + "Kit Shop", Size.ONE_LINE, plugin, parent, opener);
+        super(ChatColor.BLUE + "Kit Shop", Size.ONE_LINE, plugin, parent);
         net.spideynn.bukkit.kitgui.mongodb.Player user = Main.db.getUserByPlayer(opener);
         this.setItem(0, new KitShopMenuItem("Assassin", new ItemStack(Material.STONE_SWORD), user.kits.contains(Kits.ASSASSIN.getKitNum()), 100, Kits.ASSASSIN));
     }
@@ -112,14 +106,14 @@ class KitShopMenuItem extends MenuItem {
             event.setWillClose(true);
             return;
         }
-        new KitShopConfirmMenu(Main.getInstance(), cost, kit, event.getPlayer(), getIcon()).open(event.getPlayer());
+        new KitShopConfirmMenu(Main.getInstance(), cost, kit, getIcon()).open(event.getPlayer());
     }
 }
 
 class KitShopConfirmMenu extends ItemMenu {
 
-    public KitShopConfirmMenu(JavaPlugin plugin, int cost, Kits kit, Player player, ItemStack itemToBuy) {
-        super("Confirm Purchase", Size.ONE_LINE, plugin, player);
+    public KitShopConfirmMenu(JavaPlugin plugin, int cost, Kits kit, ItemStack itemToBuy) {
+        super("Confirm Purchase", Size.ONE_LINE, plugin);
         this.setItem(0, new KitShopConfirmItem(kit, cost));
         this.setItem(3, new StaticMenuItem(itemToBuy.getItemMeta().getDisplayName(), itemToBuy));
         this.setItem(7, new KitShopCancelItem());
@@ -156,7 +150,7 @@ class KitShopConfirmMenu extends ItemMenu {
 
 class ItemShopMenuItem extends MenuItem {
 
-    final int price;
+    private final int price;
 
     public ItemShopMenuItem(String displayName, ItemStack icon, int itemPrice, String... lore) {
         super(displayName, icon, lore);

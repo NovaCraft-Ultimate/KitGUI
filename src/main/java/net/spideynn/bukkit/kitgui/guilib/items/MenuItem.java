@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class MenuItem {
     private final String displayName;
-    private ItemStack icon;
+    protected ItemStack icon;
     private final List<String> lore;
 
     public MenuItem(String displayName, ItemStack icon, String... lore) {

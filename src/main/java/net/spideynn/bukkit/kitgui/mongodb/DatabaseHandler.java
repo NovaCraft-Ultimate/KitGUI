@@ -9,7 +9,6 @@ import org.mongodb.morphia.Morphia;
 public class DatabaseHandler {
     private MongoClient mc;
     private Morphia morphia;
-    private Datastore datastore;
     private PlayerDAO playerDAO;
 
     public DatabaseHandler(int port)
@@ -23,7 +22,7 @@ public class DatabaseHandler {
         morphia = new Morphia();
 
         morphia.map(Player.class);
-        datastore = morphia.createDatastore(mc, "novacraft");
+        Datastore datastore = morphia.createDatastore(mc, "novacraft");
         datastore.ensureIndexes();
 
         playerDAO = new PlayerDAO(Player.class, datastore);
@@ -49,6 +48,6 @@ public class DatabaseHandler {
 
     public boolean doesPlayerHaveKit(org.bukkit.entity.Player player, Kits kit) {
         Player user = getUserByPlayer(player);
-        return user.kits.contains(kit);
+        return user.kits.contains(kit.getKitNum());
     }
 }
