@@ -38,7 +38,7 @@ class KitShopItem extends MenuItem {
 
 class ItemShopItem extends MenuItem {
 
-    //TODO: Fix loop thing on back menu system.
+    //TODO: Fix StackOverflow on back menu system.
 
     public ItemShopItem() {
         super(ChatColor.GREEN + "Item Shop", new ItemStack(Material.EMERALD));
