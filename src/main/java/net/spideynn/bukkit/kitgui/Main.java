@@ -51,18 +51,28 @@ public class Main extends JavaPlugin {
                 Player player = (Player) sender;
                 if (args.length == 2 && args[0].equalsIgnoreCase("unlockall")) {
                     Player p = Bukkit.getPlayer(args[1]);
-                    if (p.getPlayer() == null) sender.sendMessage(ChatColor.RED + "Player is not online or does not exist.");
+                    if (p.getPlayer() == null) {
+                        sender.sendMessage(ChatColor.RED + "Player is not online or does not exist.");
+                        return true;
+                    }
                     net.spideynn.bukkit.kitgui.mongodb.Player pl = db.getUserByPlayer(p.getPlayer());
-                    for (Kits kits : Kits.values())
-                        pl.kits.add(kits.getKitNum());
-                    db.savePlayer(pl);
+                    for (Kits kit : Kits.values()) {
+                        pl.unlockKit(kit);
+                    }
+                    Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
+                        db.savePlayer(pl);
+                    });
+                    player.getPlayer().sendMessage("Unlocked all the kits for " + args[1] + ".");
                     return true;
                 } else if (args.length == 2 && args[0].equalsIgnoreCase("lockall")) {
                     Player p = Bukkit.getPlayer(args[1]).getPlayer();
                     if (p.getPlayer() == null) sender.sendMessage(ChatColor.RED + "Player is not online or does not exist.");
                     net.spideynn.bukkit.kitgui.mongodb.Player pl = db.getUserByPlayer(p.getPlayer());
                     pl.kits = new ArrayList<>();
-                    db.savePlayer(pl);
+                    Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
+                        db.savePlayer(pl);
+                    });
+                    p.getPlayer().sendMessage("Locked all the kits for " + args[1] + ".");
                     return true;
                 }
                 MainGUI mainGUI = new MainGUI(this, player);

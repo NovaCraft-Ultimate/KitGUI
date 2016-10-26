@@ -1,5 +1,6 @@
 package net.spideynn.bukkit.kitgui.mongodb;
 
+import net.spideynn.bukkit.kitgui.utils.Kits;
 import org.mongodb.morphia.annotations.*;
 
 import java.util.ArrayList;
@@ -53,6 +54,10 @@ public class Player {
     public void setUsername(String username) {
         this.username = username;
         nameHistory.add(username);
+    }
+
+    public void unlockKit(Kits kit) {
+        kits.add(kit.getKitNum());
     }
 
     public String toString() {

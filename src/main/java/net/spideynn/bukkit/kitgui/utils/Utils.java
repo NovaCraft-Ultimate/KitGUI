@@ -2,6 +2,7 @@ package net.spideynn.bukkit.kitgui.utils;
 
 import me.robin.battlelevels.objects.BattlePlayer;
 import net.spideynn.bukkit.kitgui.Main;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -13,6 +14,8 @@ public class Utils {
         player.sendMessage(ChatColor.AQUA + "You have " + ChatColor.GOLD + battlePlayer.getScore() + ChatColor.AQUA + " credits remaining.");
         net.spideynn.bukkit.kitgui.mongodb.Player dbPlayer = Main.db.getUserByPlayer(player);
         dbPlayer.kits.add(kit.getKitNum());
-        Main.db.savePlayer(dbPlayer);
+        Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
+            Main.db.savePlayer(dbPlayer);
+        });
     }
 }

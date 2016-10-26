@@ -34,6 +34,11 @@ class KitShopItem extends MenuItem {
     public KitShopItem(Player opener) {
         super(ChatColor.GOLD + "Kit Shop", new ItemStack(Material.DIAMOND_AXE));
     }
+
+    @Override
+    public void onItemClick(ItemClickEvent event) {
+        new KitShopMenu(Main.getInstance(), event.getPlayer()).open(event.getPlayer());
+    }
 }
 
 class ItemShopItem extends MenuItem {
@@ -41,7 +46,7 @@ class ItemShopItem extends MenuItem {
     //TODO: Fix StackOverflow on back menu system.
 
     public ItemShopItem() {
-        super(ChatColor.GREEN + "Item Shop", new ItemStack(Material.EMERALD));
+        super(ChatColor.GREEN + "Item Shop [NOT AVAILABLE]", new ItemStack(Material.EMERALD));
     }
 
     @Override
@@ -60,10 +65,14 @@ class ItemShopMenu extends ItemMenu {
 
 class KitShopMenu extends ItemMenu {
 
-    public KitShopMenu(JavaPlugin plugin, ItemMenu parent, Player opener) {
-        super(ChatColor.BLUE + "Kit Shop", Size.ONE_LINE, plugin, parent);
+    public KitShopMenu(JavaPlugin plugin, Player opener) {
+        super(ChatColor.BLUE + "Kit Shop", Size.ONE_LINE, plugin);
         net.spideynn.bukkit.kitgui.mongodb.Player user = Main.db.getUserByPlayer(opener);
-        this.setItem(0, new KitShopMenuItem("Assassin", new ItemStack(Material.STONE_SWORD), user.kits.contains(Kits.ASSASSIN.getKitNum()), 100, Kits.ASSASSIN));
+        this.setItem(0, new KitShopMenuItem("Assassin", new ItemStack(Material.STONE_SWORD), user.kits.contains(Kits.ASSASSIN.getKitNum()), 30, Kits.ASSASSIN));
+        this.setItem(1, new KitShopMenuItem("Axes", new ItemStack(Material.IRON_AXE), user.kits.contains(Kits.AXES.getKitNum()), 15, Kits.ASSASSIN));
+        this.setItem(2, new KitShopMenuItem("Cacti", new ItemStack(Material.CACTUS), user.kits.contains(Kits.CACTI.getKitNum()), 25, Kits.ASSASSIN));
+        this.setItem(3, new KitShopMenuItem("Enderman", new ItemStack(Material.EYE_OF_ENDER), user.kits.contains(Kits.ENDERMAN.getKitNum()), 24, Kits.ASSASSIN));
+        this.setItem(4, new KitShopMenuItem("Sniper", new ItemStack(Material.BOW), user.kits.contains(Kits.SNIPER.getKitNum()), 50, Kits.ASSASSIN));
     }
 }
 
@@ -131,7 +140,7 @@ class KitShopConfirmMenu extends ItemMenu {
 
         @Override
         public void onItemClick(ItemClickEvent event) {
-            Utils.buyKit(BattleLevelsAPI.findPlayer(event.getPlayer().getUniqueId().toString()), event.getPlayer(), cost, kit);
+            Utils.buyKit(BattleLevelsAPI.findPlayer(event.getPlayer().getDisplayName()), event.getPlayer(), cost, kit);
         }
     }
 
