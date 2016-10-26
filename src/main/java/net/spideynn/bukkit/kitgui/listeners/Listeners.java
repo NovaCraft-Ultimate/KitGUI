@@ -28,7 +28,7 @@ public class Listeners implements Listener {
     @EventHandler
     public void onPlayerLoginEvent(PlayerLoginEvent event) {
         Main.choseKit.put(event.getPlayer(), false);
-        event.getPlayer().performCommand("spawn");
+        event.getPlayer().teleport(event.getPlayer().getWorld().getSpawnLocation());
         event.getPlayer().setGameMode(GameMode.ADVENTURE);
     }
 

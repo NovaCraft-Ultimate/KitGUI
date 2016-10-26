@@ -14,9 +14,6 @@ public class DatabaseHandler {
     public DatabaseHandler(int port)
     {
         ServerAddress addr = new ServerAddress("localhost", port);
-        //List<MongoCredential> credentials = new ArrayList<>();
-        //credentials.add(MongoCredential.createCredential("username", "database", "password".toCharArray()));
-        //mc = new MongoClient(addr, credentials);
         mc = new MongoClient(addr);
 
         morphia = new Morphia();
