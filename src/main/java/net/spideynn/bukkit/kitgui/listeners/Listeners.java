@@ -30,6 +30,8 @@ public class Listeners implements Listener {
         Main.choseKit.put(event.getPlayer(), false);
         event.getPlayer().teleport(event.getPlayer().getWorld().getSpawnLocation());
         event.getPlayer().setGameMode(GameMode.ADVENTURE);
+        Player pl = Main.db.getUserByPlayer(event.getPlayer()); // creates player when he joins
+        Main.db.savePlayer(pl);
     }
 
     @EventHandler

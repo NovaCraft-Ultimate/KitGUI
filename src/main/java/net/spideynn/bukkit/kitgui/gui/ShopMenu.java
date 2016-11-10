@@ -54,25 +54,25 @@ class ItemShopItem extends MenuItem {
 
     }
 }
-
+/*
 class ItemShopMenu extends ItemMenu {
 
     public ItemShopMenu(String name, Size size, JavaPlugin plugin, ItemMenu parent) {
         super(name, size, plugin, parent);
         //TODO: Set up shop using credits from BattleLevels.
     }
-}
+}*/
 
 class KitShopMenu extends ItemMenu {
 
     public KitShopMenu(JavaPlugin plugin, Player opener) {
         super(ChatColor.BLUE + "Kit Shop", Size.ONE_LINE, plugin);
         net.spideynn.bukkit.kitgui.mongodb.Player user = Main.db.getUserByPlayer(opener);
-        this.setItem(0, new KitShopMenuItem("Assassin", new ItemStack(Material.STONE_SWORD), user.kits.contains(Kits.ASSASSIN.getKitNum()), 30, Kits.ASSASSIN));
-        this.setItem(1, new KitShopMenuItem("Axes", new ItemStack(Material.IRON_AXE), user.kits.contains(Kits.AXES.getKitNum()), 15, Kits.ASSASSIN));
-        this.setItem(2, new KitShopMenuItem("Cacti", new ItemStack(Material.CACTUS), user.kits.contains(Kits.CACTI.getKitNum()), 25, Kits.ASSASSIN));
-        this.setItem(3, new KitShopMenuItem("Enderman", new ItemStack(Material.EYE_OF_ENDER), user.kits.contains(Kits.ENDERMAN.getKitNum()), 24, Kits.ASSASSIN));
-        this.setItem(4, new KitShopMenuItem("Sniper", new ItemStack(Material.BOW), user.kits.contains(Kits.SNIPER.getKitNum()), 50, Kits.ASSASSIN));
+        this.setItem(0, new KitShopMenuItem("Assassin", new ItemStack(Material.STONE_SWORD), user.kits.contains(Kits.ASSASSIN.getKitNum()), 45, Kits.ASSASSIN));
+        this.setItem(1, new KitShopMenuItem("Axes", new ItemStack(Material.IRON_AXE), user.kits.contains(Kits.AXES.getKitNum()), 35, Kits.AXES));
+        this.setItem(2, new KitShopMenuItem("Cacti", new ItemStack(Material.CACTUS), user.kits.contains(Kits.CACTI.getKitNum()), 60, Kits.CACTI));
+        this.setItem(3, new KitShopMenuItem("Enderman", new ItemStack(Material.EYE_OF_ENDER), user.kits.contains(Kits.ENDERMAN.getKitNum()), 40, Kits.ENDERMAN));
+        this.setItem(4, new KitShopMenuItem("Sniper", new ItemStack(Material.BOW), user.kits.contains(Kits.SNIPER.getKitNum()), 85, Kits.SNIPER));
     }
 }
 
@@ -106,12 +106,14 @@ class KitShopMenuItem extends MenuItem {
             list.add(ChatColor.BLUE + "COST: " + ChatColor.GOLD + cost);
             iconMeta.setLore(list);
         }
+        icon.setItemMeta(iconMeta);
         return icon;
     }
 
     @Override
     public void onItemClick(ItemClickEvent event) {
         if (hasBought) {
+            event.getPlayer().sendMessage(ChatColor.RED + "You already purchased this kit!");
             event.setWillClose(true);
             return;
         }
@@ -141,6 +143,7 @@ class KitShopConfirmMenu extends ItemMenu {
         @Override
         public void onItemClick(ItemClickEvent event) {
             Utils.buyKit(BattleLevelsAPI.findPlayer(event.getPlayer().getDisplayName()), event.getPlayer(), cost, kit);
+            event.setWillClose(true);
         }
     }
 
@@ -156,7 +159,7 @@ class KitShopConfirmMenu extends ItemMenu {
         }
     }
 }
-
+/*
 class ItemShopMenuItem extends MenuItem {
 
     private final int price;
@@ -170,4 +173,4 @@ class ItemShopMenuItem extends MenuItem {
     public void onItemClick(ItemClickEvent event) {
 
     }
-}
+}*/

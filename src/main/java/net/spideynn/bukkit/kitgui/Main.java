@@ -57,7 +57,7 @@ public class Main extends JavaPlugin {
                     }
                     net.spideynn.bukkit.kitgui.mongodb.Player pl = db.getUserByPlayer(p.getPlayer());
                     for (Kits kit : Kits.values()) {
-                        pl.unlockKit(kit);
+                        pl.kits.add(kit.getKitNum());
                     }
                     Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
                         db.savePlayer(pl);

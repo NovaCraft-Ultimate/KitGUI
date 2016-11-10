@@ -1,6 +1,7 @@
 package net.spideynn.bukkit.kitgui.mongodb;
 
 import net.spideynn.bukkit.kitgui.utils.Kits;
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.*;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.List;
 public class Player {
 
     @Id
-    public int id;
+    public ObjectId id;
 
     @Indexed(options = @IndexOptions(unique = true))
     public String uuid;
@@ -33,6 +34,10 @@ public class Player {
 
     @Property("kits")
     public List<Integer> kits = new ArrayList<>();
+
+    public ObjectId getId() {
+        return id;
+    }
 
     public void setUUID(String uuid) {
         this.uuid = uuid;

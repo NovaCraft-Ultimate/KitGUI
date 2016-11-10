@@ -2,6 +2,7 @@ package net.spideynn.bukkit.kitgui.mongodb;
 
 import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
+import net.spideynn.bukkit.kitgui.Main;
 import net.spideynn.bukkit.kitgui.utils.Kits;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
