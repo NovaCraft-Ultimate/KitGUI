@@ -25,12 +25,12 @@ class ShopMenu extends ItemMenu {
         setOpener(opener);
         this.setItem(8, new BackItem());
         this.setItem(3, new ItemShopItem());
-        this.setItem(6, new KitShopItem(opener));
+        this.setItem(6, new KitShopItem());
     }
 }
 
 class KitShopItem extends MenuItem {
-    KitShopItem(Player opener) {
+    KitShopItem() {
         super(ChatColor.GOLD + "Kit Shop", new ItemStack(Material.DIAMOND_AXE));
     }
 
@@ -50,7 +50,7 @@ class ItemShopItem extends MenuItem {
 
     @Override
     public void onItemClick(ItemClickEvent event) {
-
+        // wip
     }
 }
 /*
