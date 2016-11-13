@@ -15,13 +15,13 @@ class AdminMenu extends ItemMenu {
     }
 
     class DisableDropsItem extends MenuItem {
-        public DisableDropsItem() {
+        DisableDropsItem() {
             super("", new ItemStack(Material.AIR));
         }
     }
 
     class ClearChatItem extends MenuItem {
-        public ClearChatItem() {
+        ClearChatItem() {
             super("", new ItemStack(Material.AIR));
         }
     }
