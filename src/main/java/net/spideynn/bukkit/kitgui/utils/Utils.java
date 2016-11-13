@@ -9,9 +9,9 @@ import org.bukkit.entity.Player;
 public class Utils {
 
     public static void buyKit(BattlePlayer battlePlayer, Player player, int cost, Kits kit) {
-        if (battlePlayer.getScore() >= cost)
+        if (battlePlayer.getScore() >= cost) {
             battlePlayer.setScore(battlePlayer.getScore() - cost);
-        else {
+        } else {
             player.sendMessage(ChatColor.RED + "You do not have enough credits to purchase this kit.");
             player.closeInventory();
             return;
