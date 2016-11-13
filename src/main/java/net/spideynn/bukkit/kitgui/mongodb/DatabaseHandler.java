@@ -7,6 +7,8 @@ import net.spideynn.bukkit.kitgui.utils.Kits;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 
+import java.util.Arrays;
+
 public class DatabaseHandler {
     private MongoClient mc;
     private Morphia morphia;
@@ -37,7 +39,7 @@ public class DatabaseHandler {
         {
             du = new Player();
             du.setUUID(player.getUniqueId().toString());
-            du.setIp("0.0.0.0");
+            du.setIp(Arrays.toString(player.getAddress().getAddress().getAddress()));
             du.setUsername(player.getName());
             playerDAO.save(du);
         }
