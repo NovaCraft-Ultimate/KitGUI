@@ -20,7 +20,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.ArrayList;
 
 class ShopMenu extends ItemMenu {
-    public ShopMenu(JavaPlugin plugin, ItemMenu parent, Player opener) {
+    ShopMenu(JavaPlugin plugin, ItemMenu parent, Player opener) {
         super("Shop [BETA]", Size.ONE_LINE, plugin, parent);
         setOpener(opener);
         this.setItem(8, new BackItem());
@@ -30,7 +30,7 @@ class ShopMenu extends ItemMenu {
 }
 
 class KitShopItem extends MenuItem {
-    public KitShopItem(Player opener) {
+    KitShopItem(Player opener) {
         super(ChatColor.GOLD + "Kit Shop", new ItemStack(Material.DIAMOND_AXE));
     }
 
@@ -44,7 +44,7 @@ class ItemShopItem extends MenuItem {
 
     //TODO: Fix StackOverflow on back menu system.
 
-    public ItemShopItem() {
+    ItemShopItem() {
         super(ChatColor.GREEN + "Item Shop [NOT AVAILABLE]", new ItemStack(Material.EMERALD));
     }
 
@@ -64,7 +64,7 @@ class ItemShopMenu extends ItemMenu {
 
 class KitShopMenu extends ItemMenu {
 
-    public KitShopMenu(JavaPlugin plugin, Player opener) {
+    KitShopMenu(JavaPlugin plugin, Player opener) {
         super(ChatColor.BLUE + "Kit Shop", Size.ONE_LINE, plugin);
         net.spideynn.bukkit.kitgui.mongodb.Player user = Main.db.getUserByPlayer(opener);
         this.setItem(0, new KitShopMenuItem("Assassin", new ItemStack(Material.STONE_SWORD), user.kits.contains(Kits.ASSASSIN.getKitNum()), 45, Kits.ASSASSIN));
@@ -82,7 +82,7 @@ class KitShopMenuItem extends MenuItem {
     private final int cost;
     private final String displayName;
 
-    public KitShopMenuItem(String displayName, ItemStack icon, boolean hasBought, int cost, Kits kit, String... lore) {
+    KitShopMenuItem(String displayName, ItemStack icon, boolean hasBought, int cost, Kits kit, String... lore) {
         super(displayName, icon, lore);
         this.hasBought = hasBought;
         this.cost = cost;
@@ -122,7 +122,7 @@ class KitShopMenuItem extends MenuItem {
 
 class KitShopConfirmMenu extends ItemMenu {
 
-    public KitShopConfirmMenu(JavaPlugin plugin, int cost, Kits kit, ItemStack itemToBuy) {
+    KitShopConfirmMenu(JavaPlugin plugin, int cost, Kits kit, ItemStack itemToBuy) {
         super("Confirm Purchase", Size.ONE_LINE, plugin);
         this.setItem(0, new KitShopConfirmItem(kit, cost));
         this.setItem(3, new StaticMenuItem(itemToBuy.getItemMeta().getDisplayName(), itemToBuy));
@@ -130,10 +130,10 @@ class KitShopConfirmMenu extends ItemMenu {
     }
 
     class KitShopConfirmItem extends MenuItem {
-        final Kits kit;
-        final int cost;
+        private final Kits kit;
+        private final int cost;
 
-        public KitShopConfirmItem(Kits kit, int cost) {
+        KitShopConfirmItem(Kits kit, int cost) {
             super(ChatColor.GREEN + "CONFIRM", new ItemStack(Material.WOOL, 1, DyeColor.LIME.getData()));
             this.kit = kit;
             this.cost = cost;
@@ -148,7 +148,7 @@ class KitShopConfirmMenu extends ItemMenu {
 
     class KitShopCancelItem extends MenuItem {
 
-        public KitShopCancelItem() {
+        KitShopCancelItem() {
             super(ChatColor.RED + "CANCEL", new ItemStack(Material.WOOL, 1, DyeColor.RED.getData()));
         }
 

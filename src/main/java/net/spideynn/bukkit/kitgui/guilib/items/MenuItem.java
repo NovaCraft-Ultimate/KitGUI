@@ -27,7 +27,7 @@ public class MenuItem {
      *
      * @return The display name.
      */
-    String getDisplayName() {
+    protected String getDisplayName() {
         return displayName;
     }
 
@@ -54,7 +54,7 @@ public class MenuItem {
      *
      * @return The lore.
      */
-    List<String> getLore() {
+    protected List<String> getLore() {
         return lore;
     }
 
@@ -85,7 +85,7 @@ public class MenuItem {
      * @param lore        The lore.
      * @return The ItemStack.
      */
-    static ItemStack setNameAndLore(ItemStack itemStack, String displayName, List<String> lore) {
+    protected static ItemStack setNameAndLore(ItemStack itemStack, String displayName, List<String> lore) {
         ItemMeta meta = itemStack.getItemMeta();
         meta.setDisplayName(displayName);
         if (lore != null) meta.setLore(lore);
