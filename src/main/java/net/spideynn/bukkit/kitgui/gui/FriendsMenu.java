@@ -15,10 +15,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.UUID;
 
-public class FriendsMenu extends ItemMenu {
-    public FriendsMenu(JavaPlugin plugin, ItemMenu parent, Player opener) {
+class FriendsMenu extends ItemMenu {
+    public FriendsMenu(final JavaPlugin plugin, ItemMenu parent, Player opener) {
         super("Friends", Size.TWO_LINE, plugin, parent);
-        this.setItem(8, new BackItem(Material.BARRIER));
+        this.setItem(8, new BackItem());
         this.setItem(0, new AddFriendItem());
         net.spideynn.bukkit.kitgui.mongodb.Player playerDb = Main.db.getUserByPlayer(opener);
         int counter = 1;

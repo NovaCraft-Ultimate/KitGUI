@@ -7,7 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class AdminMenu extends ItemMenu {
+class AdminMenu extends ItemMenu {
     public AdminMenu(JavaPlugin plugin) {
         super(ChatColor.DARK_RED + "Admin Menu", Size.ONE_LINE, plugin);
         this.setItem(0, new DisableDropsItem());

@@ -6,7 +6,6 @@ import net.spideynn.bukkit.kitgui.guilib.events.ItemClickEvent;
 import net.spideynn.bukkit.kitgui.guilib.items.BackItem;
 import net.spideynn.bukkit.kitgui.guilib.items.MenuItem;
 import net.spideynn.bukkit.kitgui.guilib.items.StaticMenuItem;
-import net.spideynn.bukkit.kitgui.guilib.items.SubMenuItem;
 import net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu;
 import net.spideynn.bukkit.kitgui.utils.Kits;
 import net.spideynn.bukkit.kitgui.utils.Utils;
@@ -20,11 +19,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 
-public class ShopMenu extends ItemMenu {
+class ShopMenu extends ItemMenu {
     public ShopMenu(JavaPlugin plugin, ItemMenu parent, Player opener) {
         super("Shop [BETA]", Size.ONE_LINE, plugin, parent);
         setOpener(opener);
-        this.setItem(8, new BackItem(Material.BARRIER));
+        this.setItem(8, new BackItem());
         this.setItem(3, new ItemShopItem());
         this.setItem(6, new KitShopItem(opener));
     }
@@ -78,10 +77,10 @@ class KitShopMenu extends ItemMenu {
 
 
 class KitShopMenuItem extends MenuItem {
-    final Kits kit;
-    final boolean hasBought;
-    final int cost;
-    final String displayName;
+    private final Kits kit;
+    private final boolean hasBought;
+    private final int cost;
+    private final String displayName;
 
     public KitShopMenuItem(String displayName, ItemStack icon, boolean hasBought, int cost, Kits kit, String... lore) {
         super(displayName, icon, lore);

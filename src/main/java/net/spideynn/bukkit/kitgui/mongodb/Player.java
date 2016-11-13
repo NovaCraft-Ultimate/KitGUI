@@ -11,26 +11,26 @@ import java.util.List;
 public class Player {
 
     @Id
-    public ObjectId id;
+    private ObjectId id;
 
     @Indexed(options = @IndexOptions(unique = true))
-    public String uuid;
+    private String uuid;
 
     @Indexed
-    public String username;
+    private String username;
 
-    public String ip;
+    private String ip;
 
-    public long connectionTime;
+    private long connectionTime;
 
     @Property("ip_history")
-    public List<String> ipHistory = new ArrayList<>();
+    private final List<String> ipHistory = new ArrayList<>();
 
     @Property("name_history")
-    public List<String> nameHistory = new ArrayList<>();
+    private final List<String> nameHistory = new ArrayList<>();
 
     @Property("friends")
-    public List<String> friends = new ArrayList<>();
+    public final List<String> friends = new ArrayList<>();
 
     @Property("kits")
     public List<Integer> kits = new ArrayList<>();

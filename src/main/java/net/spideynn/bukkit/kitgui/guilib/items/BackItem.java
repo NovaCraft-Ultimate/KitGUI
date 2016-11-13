@@ -28,8 +28,8 @@ import org.bukkit.inventory.ItemStack;
  */
 public class BackItem extends StaticMenuItem {
 
-    public BackItem(Material backItem) {
-        super(ChatColor.RED + "Back", new ItemStack(backItem));
+    public BackItem() {
+        super(ChatColor.RED + "Back", new ItemStack(Material.BARRIER));
     }
 
     @Override

@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
  * An event called when an Item in the {@link net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu} is clicked.
  */
 public class ItemClickEvent {
-    private Player player;
+    private final Player player;
     private boolean goBack = false;
     private boolean close = false;
     private boolean update = false;

@@ -18,9 +18,9 @@ import java.util.logging.Logger;
 
 public class Main extends JavaPlugin {
 
-    public Logger log = getLogger();
-    public static HashMap<Player, Boolean> choseKit = new HashMap<Player, Boolean>();
-    public static DatabaseHandler db = new DatabaseHandler(27017);
+    private final Logger log = getLogger();
+    public static final HashMap<Player, Boolean> choseKit = new HashMap<>();
+    public static final DatabaseHandler db = new DatabaseHandler(27017);
     private static JavaPlugin instance;
 
     @Override
@@ -59,19 +59,16 @@ public class Main extends JavaPlugin {
                     for (Kits kit : Kits.values()) {
                         pl.kits.add(kit.getKitNum());
                     }
-                    Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
-                        db.savePlayer(pl);
-                    });
+                    Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> db.savePlayer(pl));
                     player.getPlayer().sendMessage("Unlocked all the kits for " + args[1] + ".");
                     return true;
                 } else if (args.length == 2 && args[0].equalsIgnoreCase("lockall")) {
                     Player p = Bukkit.getPlayer(args[1]).getPlayer();
-                    if (p.getPlayer() == null) sender.sendMessage(ChatColor.RED + "Player is not online or does not exist.");
+                    if (p.getPlayer() == null)
+                        sender.sendMessage(ChatColor.RED + "Player is not online or does not exist.");
                     net.spideynn.bukkit.kitgui.mongodb.Player pl = db.getUserByPlayer(p.getPlayer());
                     pl.kits = new ArrayList<>();
-                    Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
-                        db.savePlayer(pl);
-                    });
+                    Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> db.savePlayer(pl));
                     p.getPlayer().sendMessage("Locked all the kits for " + args[1] + ".");
                     return true;
                 }

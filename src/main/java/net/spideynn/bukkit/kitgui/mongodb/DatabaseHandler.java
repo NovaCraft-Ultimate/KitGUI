@@ -2,7 +2,6 @@ package net.spideynn.bukkit.kitgui.mongodb;
 
 import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
-import net.spideynn.bukkit.kitgui.Main;
 import net.spideynn.bukkit.kitgui.utils.Kits;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
@@ -10,16 +9,14 @@ import org.mongodb.morphia.Morphia;
 import java.util.Arrays;
 
 public class DatabaseHandler {
-    private MongoClient mc;
-    private Morphia morphia;
-    private PlayerDAO playerDAO;
+    private final PlayerDAO playerDAO;
 
     public DatabaseHandler(int port)
     {
         ServerAddress addr = new ServerAddress("localhost", port);
-        mc = new MongoClient(addr);
+        MongoClient mc = new MongoClient(addr);
 
-        morphia = new Morphia();
+        Morphia morphia = new Morphia();
 
         morphia.map(Player.class);
         Datastore datastore = morphia.createDatastore(mc, "novacraft");

@@ -6,7 +6,6 @@ import net.spideynn.bukkit.kitgui.guilib.items.BackItem;
 import net.spideynn.bukkit.kitgui.guilib.items.MenuItem;
 import net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu;
 import net.spideynn.bukkit.kitgui.utils.Kits;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -17,10 +16,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.ArrayList;
-
-public class KitsMenu extends ItemMenu {
-    public KitsMenu(JavaPlugin plugin, ItemMenu parent, Player opener) {
+class KitsMenu extends ItemMenu {
+    KitsMenu(JavaPlugin plugin, ItemMenu parent, Player opener) {
         super("Kits", Size.ONE_LINE, plugin, parent);
         setOpener(opener);
         this.setItem(0, new ArcherKit());
@@ -30,12 +27,12 @@ public class KitsMenu extends ItemMenu {
         this.setItem(4, new EndermanKit());
         this.setItem(5, new SniperKit());
         this.setItem(6, new TankKit());
-        this.setItem(8, new BackItem(Material.BARRIER));
+        this.setItem(8, new BackItem());
     }
 }
 
 class ArcherKit extends MenuItem {
-    public ArcherKit() {
+    ArcherKit() {
         super(ChatColor.DARK_GREEN + "Archer", new ItemStack(Material.BOW), "");
     }
 
@@ -90,7 +87,7 @@ class ArcherKit extends MenuItem {
 }
 
 class AssassinKit extends MenuItem{
-    public AssassinKit() {
+    AssassinKit() {
         super(ChatColor.DARK_GREEN + "Assassin", new ItemStack(Material.STONE_SWORD), "");
     }
 
@@ -151,7 +148,7 @@ class AssassinKit extends MenuItem{
 }
 
 class AxesKit extends MenuItem{
-    public AxesKit() {
+    AxesKit() {
         super(ChatColor.DARK_GREEN + "Axes", new ItemStack(Material.WOOD_AXE), "");
     }
 
@@ -212,7 +209,7 @@ class AxesKit extends MenuItem{
 }
 
 class CactiKit extends MenuItem {
-    public CactiKit() {
+    CactiKit() {
         super(ChatColor.DARK_GREEN + "Cacti", new ItemStack(Material.CACTUS), "");
     }
 
@@ -286,7 +283,7 @@ class CactiKit extends MenuItem {
 }
 
 class EndermanKit extends MenuItem {
-    public EndermanKit() {
+    EndermanKit() {
         super(ChatColor.DARK_GREEN + "Enderman", new ItemStack(Material.EYE_OF_ENDER), "");
     }
 
@@ -360,7 +357,7 @@ class EndermanKit extends MenuItem {
 }
 
 class SniperKit extends MenuItem {
-    public SniperKit() {
+    SniperKit() {
         super(ChatColor.DARK_GREEN + "Sniper", new ItemStack(Material.AIR), "");
         ItemStack bow = new ItemStack(Material.BOW);
         bow.addUnsafeEnchantment(Enchantment.LUCK, 1);
@@ -428,7 +425,7 @@ class SniperKit extends MenuItem {
 }
 
 class TankKit extends MenuItem {
-    public TankKit() {
+    TankKit() {
         super(ChatColor.DARK_GREEN + "Tank", new ItemStack(Material.DIAMOND_CHESTPLATE), "");
     }
 

@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class MenuItem {
     private final String displayName;
-    protected ItemStack icon;
+    private ItemStack icon;
     private final List<String> lore;
 
     public MenuItem(String displayName, ItemStack icon, String... lore) {
@@ -27,7 +27,7 @@ public class MenuItem {
      *
      * @return The display name.
      */
-    public String getDisplayName() {
+    String getDisplayName() {
         return displayName;
     }
 
@@ -36,7 +36,7 @@ public class MenuItem {
      *
      * @return The icon.
      */
-    public ItemStack getIcon() {
+    protected ItemStack getIcon() {
         return icon;
     }
 
@@ -45,7 +45,7 @@ public class MenuItem {
      *
      * @return The icon.
      */
-    public void setIcon(ItemStack itemStack) {
+    protected void setIcon(ItemStack itemStack) {
         icon = itemStack;
     }
 
@@ -54,7 +54,7 @@ public class MenuItem {
      *
      * @return The lore.
      */
-    public List<String> getLore() {
+    List<String> getLore() {
         return lore;
     }
 
@@ -85,7 +85,7 @@ public class MenuItem {
      * @param lore        The lore.
      * @return The ItemStack.
      */
-    public static ItemStack setNameAndLore(ItemStack itemStack, String displayName, List<String> lore) {
+    static ItemStack setNameAndLore(ItemStack itemStack, String displayName, List<String> lore) {
         ItemMeta meta = itemStack.getItemMeta();
         meta.setDisplayName(displayName);
         if (lore != null) meta.setLore(lore);

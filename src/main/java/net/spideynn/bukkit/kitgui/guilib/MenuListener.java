@@ -89,14 +89,12 @@ public class MenuListener implements Listener {
     /**
      * Closes all {@link net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu}s currently open.
      */
-    public static void closeOpenMenus() {
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            if (player.getOpenInventory() != null) {
-                Inventory inventory = player.getOpenInventory().getTopInventory();
-                if (inventory.getHolder() instanceof MenuHolder) {
-                    player.closeInventory();
-                }
+    private static void closeOpenMenus() {
+        Bukkit.getOnlinePlayers().stream().filter(player -> player.getOpenInventory() != null).forEach(player -> {
+            Inventory inventory = player.getOpenInventory().getTopInventory();
+            if (inventory.getHolder() instanceof MenuHolder) {
+                player.closeInventory();
             }
-        }
+        });
     }
 }

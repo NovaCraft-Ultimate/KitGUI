@@ -55,7 +55,7 @@ public class ItemMenu {
      * @param plugin The {@link org.bukkit.plugin.java.JavaPlugin} instance.
      * @param parent The ItemMenu's parent.
      */
-    public ItemMenu(String name, Size size, JavaPlugin plugin, ItemMenu parent) {
+    protected ItemMenu(String name, Size size, JavaPlugin plugin, ItemMenu parent) {
         this.plugin = plugin;
         this.name = name;
         this.size = size;
@@ -70,7 +70,7 @@ public class ItemMenu {
      * @param size   The {@link net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu.Size} of the inventory.
      * @param plugin The Plugin instance.
      */
-    public ItemMenu(String name, Size size, JavaPlugin plugin) {
+    protected ItemMenu(String name, Size size, JavaPlugin plugin) {
         this(name, size, plugin, null);
     }
 
@@ -97,7 +97,7 @@ public class ItemMenu {
      *
      * @return True if the {@link net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu} has a parent, else false.
      */
-    public boolean hasParent() {
+    private boolean hasParent() {
         return parent != null;
     }
 
@@ -115,14 +115,14 @@ public class ItemMenu {
      *
      * @return The opener of the menu.
      */
-    public Player getOpener() {
+    protected Player getOpener() {
         return opener;
     }
 
     /**
      * Sets the opener of the menu
      */
-    public void setOpener(Player player) {
+    protected void setOpener(Player player) {
         this.opener = player;
     }
 
@@ -142,7 +142,7 @@ public class ItemMenu {
      * @param menuItem The {@link net.spideynn.bukkit.kitgui.guilib.items.MenuItem}.
      * @return The {@link net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu}.
      */
-    public ItemMenu setItem(int position, MenuItem menuItem) {
+    protected ItemMenu setItem(int position, MenuItem menuItem) {
         items[position] = menuItem;
         return this;
     }
@@ -153,7 +153,7 @@ public class ItemMenu {
      * @param menuItem The {@link net.spideynn.bukkit.kitgui.guilib.items.MenuItem}.
      * @return The {@link net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu}.
      */
-    public ItemMenu fillEmptySlots(MenuItem menuItem) {
+    private ItemMenu fillEmptySlots(MenuItem menuItem) {
         for (int i = 0; i < items.length; i++) {
             if (items[i] == null) {
                 items[i] = menuItem;
@@ -167,7 +167,7 @@ public class ItemMenu {
      *
      * @return The {@link net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu}.
      */
-    public ItemMenu fillEmptySlots() {
+    protected ItemMenu fillEmptySlots() {
         return fillEmptySlots(EMPTY_SLOT_ITEM);
     }
 
@@ -190,7 +190,7 @@ public class ItemMenu {
      *
      * @param player The player to update the {@link net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu} for.
      */
-    public void update(Player player) {
+    private void update(Player player) {
         if (player.getOpenInventory() != null) {
             Inventory inventory = player.getOpenInventory().getTopInventory();
             if (inventory.getHolder() instanceof MenuHolder && ((MenuHolder) inventory.getHolder()).getMenu().equals(this)) {
@@ -232,23 +232,19 @@ public class ItemMenu {
                     player.updateInventory();
                     if (itemClickEvent.willClose() || itemClickEvent.willGoBack()) {
                         final String playerName = player.getName();
-                        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                            public void run() {
-                                Player p = Bukkit.getPlayerExact(playerName);
-                                if (p != null) {
-                                    p.closeInventory();
-                                }
+                        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                            Player p = Bukkit.getPlayerExact(playerName);
+                            if (p != null) {
+                                p.closeInventory();
                             }
                         }, 1);
                     }
                     if (itemClickEvent.willGoBack() && hasParent()) {
                         final String playerName = player.getName();
-                        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                            public void run() {
-                                Player p = Bukkit.getPlayerExact(playerName);
-                                if (p != null) {
-                                    parent.open(p);
-                                }
+                        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                            Player p = Bukkit.getPlayerExact(playerName);
+                            if (p != null) {
+                                parent.open(p);
                             }
                         }, 3);
                     }

@@ -12,7 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.HashMap;
 
 public class MainGUI extends ItemMenu {
-    public static HashMap<Player, Boolean> addFriendPrompt = new HashMap<>();
+    public static final HashMap<Player, Boolean> addFriendPrompt = new HashMap<>();
 
     public MainGUI(JavaPlugin plugin, Player opener) {
         super(ChatColor.DARK_GRAY + "KitPvP Menu", Size.THREE_LINE, plugin);

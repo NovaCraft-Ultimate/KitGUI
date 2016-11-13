@@ -11,7 +11,7 @@ public enum Kits {
     TANK(6);
 
 
-    private int kitNum;
+    private final int kitNum;
 
     Kits(int kitNum) {
         this.kitNum = kitNum;
