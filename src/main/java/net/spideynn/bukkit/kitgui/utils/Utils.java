@@ -5,6 +5,7 @@ import net.spideynn.bukkit.kitgui.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class Utils {
 
@@ -20,5 +21,18 @@ public class Utils {
         net.spideynn.bukkit.kitgui.mongodb.Player dbPlayer = Main.db.getUserByPlayer(player);
         dbPlayer.kits.add(kit.getKitNum());
         Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> Main.db.savePlayer(dbPlayer));
+    }
+
+    public static void buyItem(BattlePlayer battlePlayer, Player player, ShopItem item) {
+        if (battlePlayer.getScore() >= item.getCost()) {
+            battlePlayer.setScore(battlePlayer.getScore() - item.getCost());
+        } else {
+            player.sendMessage(ChatColor.RED + "You do not have enough credits to purchase this item.");
+            player.closeInventory();
+            return;
+        }
+        player.sendMessage(ChatColor.GREEN + "You have " + ChatColor.GOLD + battlePlayer.getScore() + ChatColor.GREEN + " credits remaining.");
+        player.getInventory().addItem(item.getItem());
+        player.closeInventory();
     }
 }

@@ -8,6 +8,7 @@ import net.spideynn.bukkit.kitgui.guilib.items.MenuItem;
 import net.spideynn.bukkit.kitgui.guilib.items.StaticMenuItem;
 import net.spideynn.bukkit.kitgui.guilib.menus.ItemMenu;
 import net.spideynn.bukkit.kitgui.utils.Kits;
+import net.spideynn.bukkit.kitgui.utils.ShopItem;
 import net.spideynn.bukkit.kitgui.utils.Utils;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
@@ -21,11 +22,11 @@ import java.util.ArrayList;
 
 class ShopMenu extends ItemMenu {
     ShopMenu(JavaPlugin plugin, ItemMenu parent, Player opener) {
-        super("Shop [BETA]", Size.ONE_LINE, plugin, parent);
+        super("Shop", Size.ONE_LINE, plugin, parent);
         setOpener(opener);
         this.setItem(8, new BackItem());
-        this.setItem(3, new ItemShopItem());
-        this.setItem(6, new KitShopItem());
+        this.setItem(2, new ItemShopItem());
+        this.setItem(5, new KitShopItem());
     }
 }
 
@@ -45,33 +46,38 @@ class ItemShopItem extends MenuItem {
     //TODO: Fix StackOverflow on back menu system.
 
     ItemShopItem() {
-        super(ChatColor.GREEN + "Item Shop [NOT AVAILABLE]", new ItemStack(Material.EMERALD));
+        super(ChatColor.GREEN + "Item Shop [BETA]", new ItemStack(Material.EMERALD));
     }
 
     @Override
     public void onItemClick(ItemClickEvent event) {
-        // wip
+        new ItemShopMenu(Main.getInstance(), new ShopMenu(Main.getInstance(), new MainGUI(Main.getInstance(), event.getPlayer()), event.getPlayer())).open(event.getPlayer());
     }
 }
-/*
+
 class ItemShopMenu extends ItemMenu {
 
-    public ItemShopMenu(String name, Size size, JavaPlugin plugin, ItemMenu parent) {
-        super(name, size, plugin, parent);
+    public ItemShopMenu(JavaPlugin plugin, ItemMenu parent) {
+        super(ChatColor.DARK_GREEN + "Item Shop", Size.THREE_LINE, plugin, parent);
+        this.setItem(26, new BackItem());
+        for (ShopItem item : ShopItem.values()) {
+            this.setItem(item.ordinal(), new ItemShopMenuItem(ChatColor.RESET + item.getItemName(), item.getItem(), item));
+        }
         //TODO: Set up shop using credits from BattleLevels.
     }
-}*/
+}
 
 class KitShopMenu extends ItemMenu {
 
     KitShopMenu(JavaPlugin plugin, Player opener) {
-        super(ChatColor.BLUE + "Kit Shop", Size.ONE_LINE, plugin);
+        super(ChatColor.BLUE + "Kit Shop", Size.ONE_LINE, plugin, new ShopMenu(Main.getInstance(), new MainGUI(Main.getInstance(), opener), opener));
         net.spideynn.bukkit.kitgui.mongodb.Player user = Main.db.getUserByPlayer(opener);
-        this.setItem(0, new KitShopMenuItem("Assassin", new ItemStack(Material.STONE_SWORD), user.kits.contains(Kits.ASSASSIN.getKitNum()), 45, Kits.ASSASSIN));
-        this.setItem(1, new KitShopMenuItem("Axes", new ItemStack(Material.IRON_AXE), user.kits.contains(Kits.AXES.getKitNum()), 35, Kits.AXES));
-        this.setItem(2, new KitShopMenuItem("Cacti", new ItemStack(Material.CACTUS), user.kits.contains(Kits.CACTI.getKitNum()), 60, Kits.CACTI));
-        this.setItem(3, new KitShopMenuItem("Enderman", new ItemStack(Material.EYE_OF_ENDER), user.kits.contains(Kits.ENDERMAN.getKitNum()), 40, Kits.ENDERMAN));
-        this.setItem(4, new KitShopMenuItem("Sniper", new ItemStack(Material.BOW), user.kits.contains(Kits.SNIPER.getKitNum()), 85, Kits.SNIPER));
+        this.setItem(0, new KitShopMenuItem(Kits.ASSASSIN.getName(), new ItemStack(Material.STONE_SWORD), user.kits.contains(Kits.ASSASSIN.getKitNum()), Kits.ASSASSIN));
+        this.setItem(1, new KitShopMenuItem(Kits.AXES.getName(), new ItemStack(Material.IRON_AXE), user.kits.contains(Kits.AXES.getKitNum()), Kits.AXES));
+        this.setItem(2, new KitShopMenuItem(Kits.CACTI.getName(), new ItemStack(Material.CACTUS), user.kits.contains(Kits.CACTI.getKitNum()), Kits.CACTI));
+        this.setItem(3, new KitShopMenuItem(Kits.ENDERMAN.getName(), new ItemStack(Material.EYE_OF_ENDER), user.kits.contains(Kits.ENDERMAN.getKitNum()), Kits.ENDERMAN));
+        this.setItem(4, new KitShopMenuItem(Kits.SNIPER.getName(), new ItemStack(Material.BOW), user.kits.contains(Kits.SNIPER.getKitNum()), Kits.SNIPER));
+        this.setItem(8, new BackItem());
     }
 }
 
@@ -82,10 +88,10 @@ class KitShopMenuItem extends MenuItem {
     private final int cost;
     private final String displayName;
 
-    KitShopMenuItem(String displayName, ItemStack icon, boolean hasBought, int cost, Kits kit, String... lore) {
+    KitShopMenuItem(String displayName, ItemStack icon, boolean hasBought, Kits kit, String... lore) {
         super(displayName, icon, lore);
         this.hasBought = hasBought;
-        this.cost = cost;
+        this.cost = kit.getCost();
         this.kit = kit;
         this.displayName = displayName;
     }
@@ -158,18 +164,18 @@ class KitShopConfirmMenu extends ItemMenu {
         }
     }
 }
-/*
+
 class ItemShopMenuItem extends MenuItem {
 
-    private final int price;
+    private final ShopItem item;
 
-    public ItemShopMenuItem(String displayName, ItemStack icon, int itemPrice, String... lore) {
-        super(displayName, icon, lore);
-        price = itemPrice;
+    public ItemShopMenuItem(String displayName, ItemStack icon, ShopItem item) {
+        super(displayName, icon);
+        this.item = item;
     }
 
     @Override
     public void onItemClick(ItemClickEvent event) {
-
+        Utils.buyItem(BattleLevelsAPI.findPlayer(event.getPlayer().getUniqueId()), event.getPlayer(), item);
     }
-}*/
+}
