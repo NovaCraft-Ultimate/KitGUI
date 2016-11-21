@@ -170,7 +170,7 @@ class ItemShopMenuItem extends MenuItem {
     private final ShopItem item;
 
     public ItemShopMenuItem(String displayName, ItemStack icon, ShopItem item) {
-        super(displayName, icon);
+        super(displayName, icon, ChatColor.GREEN + "Price: " + ChatColor.GOLD + item.getCost());
         this.item = item;
     }
 
