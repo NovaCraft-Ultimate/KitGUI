@@ -147,7 +147,7 @@ class KitShopConfirmMenu extends ItemMenu {
 
         @Override
         public void onItemClick(ItemClickEvent event) {
-            Utils.buyKit(BattleLevelsAPI.findPlayer(event.getPlayer().getDisplayName()), event.getPlayer(), cost, kit);
+            Utils.buyKit(event.getPlayer(), cost, kit);
             event.setWillClose(true);
         }
     }

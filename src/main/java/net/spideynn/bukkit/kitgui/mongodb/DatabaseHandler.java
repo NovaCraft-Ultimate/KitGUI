@@ -13,7 +13,7 @@ public class DatabaseHandler {
 
     public DatabaseHandler(int port)
     {
-        ServerAddress addr = new ServerAddress("localhost", port);
+        ServerAddress addr = new ServerAddress("10.42.246.64", port);
         MongoClient mc = new MongoClient(addr);
 
         Morphia morphia = new Morphia();

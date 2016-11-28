@@ -410,9 +410,9 @@ class SniperKit extends MenuItem {
             m6.setDisplayName(ChatColor.DARK_GREEN + "Bow");
             m6.addEnchant(Enchantment.DURABILITY, 3, true);
             m6.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
-            m6.addEnchant(Enchantment.ARROW_DAMAGE, 5, true);
-            m6.addEnchant(Enchantment.ARROW_KNOCKBACK, 2, true);
-            m6.addEnchant(Enchantment.ARROW_FIRE, 2, true);
+            m6.addEnchant(Enchantment.ARROW_DAMAGE, 4, true);
+            m6.addEnchant(Enchantment.ARROW_KNOCKBACK, 1, true);
+            m6.addEnchant(Enchantment.ARROW_FIRE, 1, true);
             i6.setItemMeta(m6);
             ItemStack i7 = new ItemStack(Material.ARROW);
             ItemMeta m7 = i7.getItemMeta();

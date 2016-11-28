@@ -12,7 +12,7 @@ public enum ShopItem {
     INSTANT_HEALTH("Instant Health Potion", new Potion(PotionType.INSTANT_HEAL).toItemStack(1), 15),
     FIRE_RESISTANCE("Fire Resistance Potion", new Potion(PotionType.FIRE_RESISTANCE).toItemStack(1), 12),
     GOLDEN_APPLE(ChatColor.AQUA + "Golden Apple", new ItemStack(Material.GOLDEN_APPLE), 15),
-    OP_GOLDEN_APPLE(ChatColor.LIGHT_PURPLE + "Golden Apple", new ItemStack(Material.GOLDEN_APPLE, (short) 1), 40),
+    OP_GOLDEN_APPLE(ChatColor.LIGHT_PURPLE + "Golden Apple", new ItemStack(Material.GOLDEN_APPLE, 1, (short) 1), 40),
     FISHING_ROD("Fishing Rod", new ItemStack(Material.FISHING_ROD), 6),
     MILK("Milk", new ItemStack(Material.MILK_BUCKET), 8),
     XP_BOTTLE("Bottle o' Enchanting", new ItemStack(Material.EXP_BOTTLE), 50),

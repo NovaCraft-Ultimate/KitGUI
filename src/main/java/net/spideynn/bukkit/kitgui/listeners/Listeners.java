@@ -54,9 +54,6 @@ public class Listeners implements Listener {
 
     @EventHandler
     public void onPlayerHunger(FoodLevelChangeEvent event) {
-        if (event.getEntity() instanceof org.bukkit.entity.Player) {
-            org.bukkit.entity.Player player = (org.bukkit.entity.Player) event.getEntity();
-            player.setFoodLevel(20);
-        }
+        event.setCancelled(true);
     }
 }
