@@ -50,7 +50,7 @@ class ArcherKit extends MenuItem {
                 p.removePotionEffect(pe.getType());
             }
 
-            p.getInventory().clear();
+
             p.getInventory().setChestplate(null);
             p.getInventory().setHelmet(null);
             p.getInventory().setLeggings(null);
@@ -121,7 +121,7 @@ class AssassinKit extends MenuItem{
                 p.removePotionEffect(pe.getType());
             }
 
-            p.getInventory().clear();
+
             p.getInventory().setChestplate(null);
             p.getInventory().setHelmet(null);
             p.getInventory().setLeggings(null);
@@ -182,7 +182,7 @@ class AxesKit extends MenuItem{
                 p.removePotionEffect(i2.getType());
             }
 
-            p.getInventory().clear();
+
             p.getInventory().setChestplate(null);
             p.getInventory().setHelmet(null);
             p.getInventory().setLeggings(null);
@@ -243,7 +243,7 @@ class CactiKit extends MenuItem {
                 p.removePotionEffect(i1.getType());
             }
 
-            p.getInventory().clear();
+
             p.getInventory().setChestplate(null);
             p.getInventory().setHelmet(null);
             p.getInventory().setLeggings(null);
@@ -318,7 +318,7 @@ class EndermanKit extends MenuItem {
                 p.removePotionEffect(i1.getType());
             }
 
-            p.getInventory().clear();
+
             p.getInventory().setChestplate(null);
             p.getInventory().setHelmet(null);
             p.getInventory().setLeggings(null);
@@ -396,7 +396,7 @@ class SniperKit extends MenuItem {
                 p.removePotionEffect(i1.getType());
             }
 
-            p.getInventory().clear();
+
             p.getInventory().setChestplate(null);
             p.getInventory().setHelmet(null);
             p.getInventory().setLeggings(null);
@@ -445,7 +445,6 @@ class TankKit extends MenuItem {
                 p.removePotionEffect(i1.getType());
             }
 
-            p.getInventory().clear();
             p.getInventory().setChestplate(null);
             p.getInventory().setHelmet(null);
             p.getInventory().setLeggings(null);
