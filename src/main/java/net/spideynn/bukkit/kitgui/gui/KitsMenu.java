@@ -50,12 +50,6 @@ class ArcherKit extends MenuItem {
                 p.removePotionEffect(pe.getType());
             }
 
-
-            p.getInventory().setChestplate(null);
-            p.getInventory().setHelmet(null);
-            p.getInventory().setLeggings(null);
-            p.getInventory().setBoots(null);
-
             ItemStack chestPlate = new ItemStack(Material.DIAMOND_CHESTPLATE);
             ItemMeta chestPlateMeta = chestPlate.getItemMeta();
             chestPlateMeta.setDisplayName(ChatColor.DARK_GREEN + "Diamond Chestplate");
@@ -77,9 +71,9 @@ class ArcherKit extends MenuItem {
             arrowMeta.setDisplayName(ChatColor.DARK_GREEN + "Arrow");
             arrow.setItemMeta(arrowMeta);
 
-            p.getInventory().setItem(1, weapon);
-            p.getInventory().setItem(0, bow);
-            p.getInventory().setItem(8, arrow);
+            p.getInventory().addItem(weapon);
+            p.getInventory().addItem(bow);
+            p.getInventory().addItem(arrow);
             p.getInventory().setChestplate(chestPlate);
             Main.choseKit.put(p, true);
         }
@@ -121,11 +115,6 @@ class AssassinKit extends MenuItem{
                 p.removePotionEffect(pe.getType());
             }
 
-
-            p.getInventory().setChestplate(null);
-            p.getInventory().setHelmet(null);
-            p.getInventory().setLeggings(null);
-            p.getInventory().setBoots(null);
             ItemStack chestplate = new ItemStack(Material.CHAINMAIL_CHESTPLATE);
             ItemMeta chestplateMeta = chestplate.getItemMeta();
             chestplateMeta.setDisplayName(ChatColor.DARK_GREEN + "Chain Chestplate");
@@ -138,9 +127,9 @@ class AssassinKit extends MenuItem{
             ItemMeta goldenAppleMeta = goldenApple.getItemMeta();
             goldenAppleMeta.setDisplayName(ChatColor.DARK_GREEN + "Golden Apple");
             goldenApple.setItemMeta(goldenAppleMeta);
-            p.getInventory().setItem(0, sword);
-            p.getInventory().setItem(1, goldenApple);
-            p.getInventory().setChestplate(chestplate);
+            p.getInventory().addItem(sword);
+            p.getInventory().addItem(goldenApple);
+            p.getInventory().addItem(chestplate);
             p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 999999, 1));
             p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 999999, 1));
         }
@@ -182,11 +171,6 @@ class AxesKit extends MenuItem{
                 p.removePotionEffect(i2.getType());
             }
 
-
-            p.getInventory().setChestplate(null);
-            p.getInventory().setHelmet(null);
-            p.getInventory().setLeggings(null);
-            p.getInventory().setBoots(null);
             ItemStack i21 = new ItemStack(Material.DIAMOND_CHESTPLATE);
             ItemMeta m21 = i21.getItemMeta();
             m21.setDisplayName(ChatColor.DARK_GREEN + "Diamond Chestplate");
@@ -201,9 +185,9 @@ class AxesKit extends MenuItem{
             ItemMeta m6 = i6.getItemMeta();
             m6.setDisplayName(ChatColor.DARK_GREEN + "Golden Apple");
             i6.setItemMeta(m6);
-            p.getInventory().setItem(0, i5);
-            p.getInventory().setItem(1, i6);
-            p.getInventory().setChestplate(i21);
+            p.getInventory().addItem(i5);
+            p.getInventory().addItem(i6);
+            p.getInventory().addItem(i21);
         }
     }
 }
@@ -243,11 +227,6 @@ class CactiKit extends MenuItem {
                 p.removePotionEffect(i1.getType());
             }
 
-
-            p.getInventory().setChestplate(null);
-            p.getInventory().setHelmet(null);
-            p.getInventory().setLeggings(null);
-            p.getInventory().setBoots(null);
             ItemStack i11 = new ItemStack(Material.LEATHER_HELMET);
             ItemMeta m11 = i11.getItemMeta();
             m11.setDisplayName(ChatColor.DARK_GREEN + "Leather Helmet");
@@ -272,11 +251,11 @@ class CactiKit extends MenuItem {
             ItemMeta m5 = i5.getItemMeta();
             m5.setDisplayName(ChatColor.DARK_GREEN + "Stone Sword");
             i5.setItemMeta(m5);
-            p.getInventory().setItem(0, i5);
-            p.getInventory().setHelmet(i11);
-            p.getInventory().setChestplate(i2);
-            p.getInventory().setLeggings(i3);
-            p.getInventory().setBoots(i4);
+            p.getInventory().addItem(i5);
+            p.getInventory().addItem(i11);
+            p.getInventory().addItem(i2);
+            p.getInventory().addItem(i3);
+            p.getInventory().addItem(i4);
             Main.choseKit.put(p, true);
         }
     }
@@ -318,11 +297,6 @@ class EndermanKit extends MenuItem {
                 p.removePotionEffect(i1.getType());
             }
 
-
-            p.getInventory().setChestplate(null);
-            p.getInventory().setHelmet(null);
-            p.getInventory().setLeggings(null);
-            p.getInventory().setBoots(null);
             ItemStack i11 = new ItemStack(Material.LEATHER_HELMET);
             ItemMeta m11 = i11.getItemMeta();
             m11.setDisplayName(ChatColor.DARK_GREEN + "Leather Helmet");
@@ -347,12 +321,12 @@ class EndermanKit extends MenuItem {
             ItemMeta m6 = i6.getItemMeta();
             m6.setDisplayName(ChatColor.DARK_GREEN + "Enderpearl");
             i6.setItemMeta(m6);
-            p.getInventory().setItem(0, i5);
-            p.getInventory().setItem(1, i6);
-            p.getInventory().setHelmet(i11);
-            p.getInventory().setChestplate(i2);
-            p.getInventory().setLeggings(i3);
-            p.getInventory().setBoots(i4);
+            p.getInventory().addItem(i5);
+            p.getInventory().addItem(i6);
+            p.getInventory().addItem(i11);
+            p.getInventory().addItem(i2);
+            p.getInventory().addItem(i3);
+            p.getInventory().addItem(i4);
         }
     }
 }
@@ -396,11 +370,6 @@ class SniperKit extends MenuItem {
                 p.removePotionEffect(i1.getType());
             }
 
-
-            p.getInventory().setChestplate(null);
-            p.getInventory().setHelmet(null);
-            p.getInventory().setLeggings(null);
-            p.getInventory().setBoots(null);
             ItemStack i21 = new ItemStack(Material.IRON_CHESTPLATE);
             ItemMeta m21 = i21.getItemMeta();
             m21.setDisplayName(ChatColor.DARK_GREEN + "Iron Chestplate");
@@ -418,9 +387,9 @@ class SniperKit extends MenuItem {
             ItemMeta m7 = i7.getItemMeta();
             m7.setDisplayName(ChatColor.DARK_GREEN + "Arrow");
             i7.setItemMeta(m7);
-            p.getInventory().setItem(0, i6);
-            p.getInventory().setItem(8, i7);
-            p.getInventory().setChestplate(i21);
+            p.getInventory().addItem(i6);
+            p.getInventory().addItem(i7);
+            p.getInventory().addItem(i21);
         }
     }
 }
@@ -445,10 +414,6 @@ class TankKit extends MenuItem {
                 p.removePotionEffect(i1.getType());
             }
 
-            p.getInventory().setChestplate(null);
-            p.getInventory().setHelmet(null);
-            p.getInventory().setLeggings(null);
-            p.getInventory().setBoots(null);
             ItemStack i11 = new ItemStack(Material.IRON_HELMET);
             ItemMeta m11 = i11.getItemMeta();
             m11.setDisplayName(ChatColor.DARK_GREEN + "Iron Helmet");
@@ -473,12 +438,12 @@ class TankKit extends MenuItem {
             ItemMeta m6 = i6.getItemMeta();
             m6.setDisplayName(ChatColor.DARK_GREEN + "Golden Apple");
             i6.setItemMeta(m6);
-            p.getInventory().setItem(0, i5);
-            p.getInventory().setItem(1, i6);
-            p.getInventory().setHelmet(i11);
-            p.getInventory().setChestplate(i2);
-            p.getInventory().setLeggings(i3);
-            p.getInventory().setBoots(i4);
+            p.getInventory().addItem(i5);
+            p.getInventory().addItem(i6);
+            p.getInventory().addItem(i11);
+            p.getInventory().addItem(i2);
+            p.getInventory().addItem(i3);
+            p.getInventory().addItem(i4);
             p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 999999, 1));
         }
     }
