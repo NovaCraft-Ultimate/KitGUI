@@ -38,6 +38,7 @@ public class DatabaseHandler {
             du.setUUID(player.getUniqueId().toString());
             du.setIp(Arrays.toString(player.getAddress().getAddress().getAddress()));
             du.setUsername(player.getName());
+            du.choseKit = false;
             playerDAO.save(du);
         }
         return du;

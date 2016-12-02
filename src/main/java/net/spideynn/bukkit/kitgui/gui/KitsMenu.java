@@ -41,7 +41,6 @@ class ArcherKit extends MenuItem {
         if (Main.choseKit.get(event.getPlayer())) {
             event.getPlayer().sendMessage(ChatColor.RED + "You already chose a kit! You can choose another one when you die.");
             event.setWillClose(true);
-
         } else {
             event.setWillClose(true);
             Player p = event.getPlayer();

@@ -64,12 +64,23 @@ public class Main extends JavaPlugin {
                     return true;
                 } else if (args.length == 2 && args[0].equalsIgnoreCase("lockall")) {
                     Player p = Bukkit.getPlayer(args[1]).getPlayer();
-                    if (p.getPlayer() == null)
+                    if (p.getPlayer() == null) {
                         sender.sendMessage(ChatColor.RED + "Player is not online or does not exist.");
+                        return true;
+                    }
                     net.spideynn.bukkit.kitgui.mongodb.Player pl = db.getUserByPlayer(p.getPlayer());
                     pl.kits = new ArrayList<>();
                     Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> db.savePlayer(pl));
                     p.getPlayer().sendMessage("Locked all the kits for " + args[1] + ".");
+                    return true;
+                } else if (args.length == 2 && args[0].equalsIgnoreCase("debug")) {
+                    Player p = Bukkit.getPlayer(args[1]).getPlayer();
+                    if (p.getPlayer() == null) {
+                        sender.sendMessage(ChatColor.RED + "Player is not online or does not exist.");
+                        return true;
+                    }
+                    net.spideynn.bukkit.kitgui.mongodb.Player pl = db.getUserByPlayer(p.getPlayer());
+                    sender.sendMessage(pl.toString());
                     return true;
                 }
                 MainGUI mainGUI = new MainGUI(this, player);

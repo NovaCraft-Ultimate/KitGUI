@@ -18,7 +18,9 @@ public class Listeners implements Listener {
     @EventHandler
     public void onPlayerQuitEvent(PlayerQuitEvent event) {
         try {
-            Main.choseKit.remove(event.getPlayer());
+            Player player = Main.db.getUserByPlayer(event.getPlayer());
+            player.choseKit = Main.choseKit.get(event.getPlayer());
+            Main.db.savePlayer(player);
         } catch (NullPointerException e) {
             // ignored
         }
@@ -26,16 +28,17 @@ public class Listeners implements Listener {
 
     @EventHandler
     public void onPlayerLoginEvent(PlayerLoginEvent event) {
-        Main.choseKit.put(event.getPlayer(), false);
+        Player player = Main.db.getUserByPlayer(event.getPlayer());
+        Main.choseKit.put(event.getPlayer(), player.choseKit);
         event.getPlayer().teleport(event.getPlayer().getWorld().getSpawnLocation());
         event.getPlayer().setGameMode(GameMode.ADVENTURE);
-        Player pl = Main.db.getUserByPlayer(event.getPlayer()); // creates player when he joins
-        Main.db.savePlayer(pl);
+        Main.db.savePlayer(player);
     }
 
     @EventHandler
     public void onPlayerDeathEvent(PlayerDeathEvent event) {
-        if (Main.choseKit.get(event.getEntity())) Main.choseKit.put(event.getEntity(), false);
+        if (Main.choseKit.get(event.getEntity()))
+            Main.choseKit.put(event.getEntity(), false);
     }
 
     @EventHandler

@@ -35,6 +35,9 @@ public class Player {
     @Property("kits")
     public List<Integer> kits = new ArrayList<>();
 
+    @Property("chose_kit")
+    public boolean choseKit;
+
     public ObjectId getId() {
         return id;
     }
@@ -66,6 +69,6 @@ public class Player {
     }
 
     public String toString() {
-        return String.valueOf(id) + "," + username + "," + ip + "," + connectionTime + "," + uuid;
+        return String.valueOf(id) + "," + username + "," + ip + "," + connectionTime + "," + uuid + "," + choseKit;
     }
 }
