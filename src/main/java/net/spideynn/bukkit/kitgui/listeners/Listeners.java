@@ -37,8 +37,9 @@ public class Listeners implements Listener {
 
     @EventHandler
     public void onPlayerDeathEvent(PlayerDeathEvent event) {
-        if (Main.choseKit.get(event.getEntity()))
+        if (Main.choseKit.get(event.getEntity())) {
             Main.choseKit.put(event.getEntity(), false);
+        }
     }
 
     @EventHandler
